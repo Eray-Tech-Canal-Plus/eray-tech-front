@@ -5,7 +5,7 @@ import {
   ChevronLeft, ChevronRight, Star, Heart, Share2, Facebook, Twitter, Instagram,
   ShoppingCart, Minus, Plus, Search, ShoppingBag, User, Smartphone, Shield, X, Check,
 } from "lucide-react";
-import { getProduct, products } from "@/lib/products";
+import { getProduct, products, type Product } from "@/lib/products";
 
 export const Route = createFileRoute("/product/$id")({
   head: ({ params }) => {
@@ -33,7 +33,7 @@ const REVIEWS = [
 ];
 
 function ProductPage() {
-  const { product } = Route.useLoaderData();
+  const { product } = Route.useLoaderData() as { product: Product };
   const navigate = useNavigate();
   const [activeImg, setActiveImg] = useState(0);
   const [storage, setStorage] = useState(product.storages[0]);
@@ -42,7 +42,8 @@ function ProductPage() {
   const [tab, setTab] = useState<"desc" | "info" | "review">("desc");
   const [checkoutOpen, setCheckoutOpen] = useState(false);
 
-  const priceExtra = { "128 Go": 0, "256 Go": 100, "512 Go": 250, "1 To": 450, "64 Go": -50 }[storage] ?? 0;
+  const priceMap: Record<string, number> = { "128 Go": 0, "256 Go": 100, "512 Go": 250, "1 To": 450, "64 Go": -50 };
+  const priceExtra = priceMap[storage] ?? 0;
   const unitPrice = product.price + priceExtra;
   const total = unitPrice * qty;
 
