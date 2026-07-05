@@ -38,7 +38,7 @@ const SERVICES: Service[] = [
     id: "essentiel",
     name: "Installation Essentiel",
     description: "Décodeur Canal+ HD, paramétrage & test des chaînes",
-    price: 49,
+    price: 245000,
     promo: { label: "Offert", price: 0 },
   },
   {
