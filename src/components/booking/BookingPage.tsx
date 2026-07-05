@@ -247,7 +247,7 @@ export default function BookingPage() {
                           </p>
                         </div>
                       ) : (
-                        <p className="font-bold">{s.price} €</p>
+                        <p className="font-bold">{s.price.toLocaleString()} Ar</p>
                       )}
                     </div>
                   </label>
@@ -397,20 +397,20 @@ export default function BookingPage() {
               <div className="flex items-baseline justify-between">
                 <span className="text-muted-foreground">Sous-total</span>
                 <span className={cn(service.promo && "line-through text-muted-foreground")}>
-                  {service.price} €
+                  {service.price.toLocaleString()} Ar
                 </span>
               </div>
               {service.promo && (
                 <div className="flex items-baseline justify-between text-pink">
                   <span>Promotion {service.promo.label}</span>
-                  <span>-{service.price - service.promo.price} €</span>
+                  <span>-{(service.price - service.promo.price).toLocaleString()} Ar</span>
                 </div>
               )}
               <Separator />
               <div className="flex items-baseline justify-between">
                 <span className="font-semibold">Total à payer</span>
                 <span className="text-2xl font-bold">
-                  {finalPrice === 0 ? "Gratuit" : `${finalPrice} €`}
+                  {finalPrice === 0 ? "Gratuit" : `${finalPrice.toLocaleString()} Ar`}
                 </span>
               </div>
               <Button
