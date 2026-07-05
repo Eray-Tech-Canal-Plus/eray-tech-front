@@ -241,9 +241,9 @@ export default function BookingPage() {
                     <div className="text-right shrink-0">
                       {s.promo ? (
                         <div>
-                          <p className="text-xs text-muted-foreground line-through">{s.price} €</p>
+                          <p className="text-xs text-muted-foreground line-through">{s.price.toLocaleString()} Ar</p>
                           <p className="font-bold text-pink">
-                            {s.promo.price === 0 ? "Gratuit" : `${s.promo.price} €`}
+                            {s.promo.price === 0 ? "Gratuit" : `${s.promo.price.toLocaleString()} Ar`}
                           </p>
                         </div>
                       ) : (
