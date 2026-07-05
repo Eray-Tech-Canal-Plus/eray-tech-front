@@ -38,21 +38,21 @@ const SERVICES: Service[] = [
     id: "essentiel",
     name: "Installation Essentiel",
     description: "Décodeur Canal+ HD, paramétrage & test des chaînes",
-    price: 49,
+    price: 245000,
     promo: { label: "Offert", price: 0 },
   },
   {
     id: "plus",
     name: "Installation Canal+ 4K",
     description: "Décodeur 4K UHD, câblage optimisé, configuration wifi",
-    price: 79,
-    promo: { label: "-50%", price: 39 },
+    price: 395000,
+    promo: { label: "-50%", price: 198000 },
   },
   {
     id: "premium",
     name: "Pack Multi-écrans",
     description: "Installation multi-pièces + application mobile & TV",
-    price: 129,
+    price: 645000,
   },
 ];
 
@@ -127,7 +127,7 @@ export default function BookingPage() {
     if (!fullName.trim()) e.fullName = "Nom complet requis";
     if (!address.trim()) e.address = "Adresse requise";
     if (!city.trim()) e.city = "Ville requise";
-    if (!/^\d{5}$/.test(postal)) e.postal = "Code postal invalide";
+    if (!/^\d{3}$/.test(postal)) e.postal = "Code postal invalide";
     if (!/^(?:\+?\d{9,13})$/.test(phone.replace(/\s/g, ""))) e.phone = "Téléphone invalide";
     if (!date) e.date = "Sélectionnez une date";
     if (!slot) e.slot = "Sélectionnez un créneau";
@@ -241,13 +241,13 @@ export default function BookingPage() {
                     <div className="text-right shrink-0">
                       {s.promo ? (
                         <div>
-                          <p className="text-xs text-muted-foreground line-through">{s.price} €</p>
+                          <p className="text-xs text-muted-foreground line-through">{s.price.toLocaleString()} Ar</p>
                           <p className="font-bold text-pink">
-                            {s.promo.price === 0 ? "Gratuit" : `${s.promo.price} €`}
+                            {s.promo.price === 0 ? "Gratuit" : `${s.promo.price.toLocaleString()} Ar`}
                           </p>
                         </div>
                       ) : (
-                        <p className="font-bold">{s.price} €</p>
+                        <p className="font-bold">{s.price.toLocaleString()} Ar</p>
                       )}
                     </div>
                   </label>
@@ -260,19 +260,19 @@ export default function BookingPage() {
           <Card title="2. Vos coordonnées" icon={User}>
             <div className="grid sm:grid-cols-2 gap-4">
               <Field label="Nom complet" error={errors.fullName}>
-                <Input value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Jean Dupont" />
+                <Input value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Jean Rakoto" />
               </Field>
               <Field label="Téléphone" error={errors.phone}>
-                <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="06 12 34 56 78" />
+                <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="034 12 345 67" />
               </Field>
               <Field label="Adresse" error={errors.address} className="sm:col-span-2">
-                <Input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="12 rue de la Paix" />
+                <Input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Lot II K 45 Ankorondrano" />
               </Field>
               <Field label="Code postal" error={errors.postal}>
-                <Input value={postal} onChange={(e) => setPostal(e.target.value)} placeholder="75002" maxLength={5} />
+                <Input value={postal} onChange={(e) => setPostal(e.target.value)} placeholder="101" maxLength={3} />
               </Field>
               <Field label="Ville" error={errors.city}>
-                <Input value={city} onChange={(e) => setCity(e.target.value)} placeholder="Paris" />
+                <Input value={city} onChange={(e) => setCity(e.target.value)} placeholder="Antananarivo" />
               </Field>
             </div>
           </Card>
@@ -397,20 +397,20 @@ export default function BookingPage() {
               <div className="flex items-baseline justify-between">
                 <span className="text-muted-foreground">Sous-total</span>
                 <span className={cn(service.promo && "line-through text-muted-foreground")}>
-                  {service.price} €
+                  {service.price.toLocaleString()} Ar
                 </span>
               </div>
               {service.promo && (
                 <div className="flex items-baseline justify-between text-pink">
                   <span>Promotion {service.promo.label}</span>
-                  <span>-{service.price - service.promo.price} €</span>
+                  <span>-{(service.price - service.promo.price).toLocaleString()} Ar</span>
                 </div>
               )}
               <Separator />
               <div className="flex items-baseline justify-between">
                 <span className="font-semibold">Total à payer</span>
                 <span className="text-2xl font-bold">
-                  {finalPrice === 0 ? "Gratuit" : `${finalPrice} €`}
+                  {finalPrice === 0 ? "Gratuit" : `${finalPrice.toLocaleString()} Ar`}
                 </span>
               </div>
               <Button
