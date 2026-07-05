@@ -45,8 +45,8 @@ const SERVICES: Service[] = [
     id: "plus",
     name: "Installation Canal+ 4K",
     description: "Décodeur 4K UHD, câblage optimisé, configuration wifi",
-    price: 79,
-    promo: { label: "-50%", price: 39 },
+    price: 395000,
+    promo: { label: "-50%", price: 198000 },
   },
   {
     id: "premium",
