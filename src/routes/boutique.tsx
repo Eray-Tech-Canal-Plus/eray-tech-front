@@ -40,7 +40,7 @@ export const Route = createFileRoute("/boutique")({
       },
     ],
   }),
-  component: Shop,
+  component: ShopThemed,
 });
 
 const PER_PAGE = 9;
@@ -51,7 +51,10 @@ function toggle<T>(list: T[], value: T): T[] {
   return list.includes(value) ? list.filter((x) => x !== value) : [...list, value];
 }
 
-function Shop() {
+function ShopThemed() {
+  return (<div className="theme-shop"><ShopInner /></div>);
+}
+function ShopInner() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [selCats, setSelCats] = useState<string[]>([]);

@@ -22,7 +22,7 @@ export const Route = createFileRoute("/product/$id")({
     if (!product) throw notFound();
     return { product };
   },
-  component: ProductPage,
+  component: ProductPageThemed,
 });
 
 const REVIEWS = [
@@ -32,7 +32,10 @@ const REVIEWS = [
   { name: "Marc Dupont", verified: true, when: "il y a 3 mois", rating: 5, title: "Design premium", body: "Finition impeccable, performances au rendez-vous. Le SAV PhoneLux est également très réactif." },
 ];
 
-function ProductPage() {
+function ProductPageThemed() {
+  return (<div className="theme-shop"><ProductPageInner /></div>);
+}
+function ProductPageInner() {
   const { product } = Route.useLoaderData() as { product: Product };
   const navigate = useNavigate();
   const [activeImg, setActiveImg] = useState(0);
