@@ -29,7 +29,7 @@ import {
   type Product,
 } from "@/lib/products";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/boutique")({
   head: () => ({
     meta: [
       { title: "Boutique — PhoneLux" },
