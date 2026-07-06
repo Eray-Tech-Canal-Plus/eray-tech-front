@@ -77,10 +77,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Canal Services – Installation Canal+, Téléphones, Mobile Banking" },
+      { title: "NEXT TECH & SERVICES – Installation Canal+, Téléphones, Mobile Banking" },
       { name: "description", content: "Installation Canal+, boutique de téléphones et Mobile Banking. Activation, réactivation et assistance rapide." },
-      { name: "author", content: "Canal Services" },
-      { property: "og:title", content: "Canal Services – Installation Canal+, Téléphones, Mobile Banking" },
+      { name: "author", content: "NEXT TECH & SERVICES" },
+      { property: "og:title", content: "NEXT TECH & SERVICES – Installation Canal+, Téléphones, Mobile Banking" },
       { property: "og:description", content: "Installation Canal+, boutique de téléphones et Mobile Banking. Activation, réactivation et assistance rapide." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -92,6 +92,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -102,7 +106,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <head>
         <HeadContent />
       </head>

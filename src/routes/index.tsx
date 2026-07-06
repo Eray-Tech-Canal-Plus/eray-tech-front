@@ -1,31 +1,88 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
-import { Tv, Smartphone, Wallet, ChevronLeft, ChevronRight, Phone, Mail, Facebook, Instagram, Twitter } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Phone,
+  ArrowRight,
+  Satellite,
+  Tv,
+  Headphones,
+  Users,
+  ShieldCheck,
+  ThumbsUp,
+  MessageCircle,
+} from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Home,
 });
 
+type ServiceId = "canal" | "phones" | "banking";
+
 type Service = {
-  id: string;
+  id: ServiceId;
+  tag: string;
   title: string;
   short: string;
-  Icon: typeof Tv;
-  subtitles?: string[];
-  cta?: string;
+  description: string;
+  cta: string;
+  image: string;
+  accentClass: string;
+  tagClass: string;
+  btnClass: string;
+  features?: { icon: typeof Satellite; label: string }[];
 };
 
 const services: Service[] = [
   {
     id: "canal",
-    title: "Installation Canal+",
+    tag: "SERVICE PRINCIPAL",
+    title: "Installation CANAL+",
     short: "Canal+",
-    Icon: Tv,
-    subtitles: ["Activation", "Réactivation", "Assistance"],
+    description: "Installation, activation et assistance Canal+ à domicile par des professionnels.",
     cta: "Demander une installation",
+    image: "/images/hero-canal.png",
+    accentClass: "text-canal",
+    tagClass: "bg-canal/20 text-canal border-canal/30",
+    btnClass: "bg-gradient-to-r from-[oklch(0.72_0.17_55)] to-[oklch(0.62_0.17_50)] hover:brightness-110",
+    features: [
+      { icon: Satellite, label: "Installation parabole" },
+      { icon: Tv, label: "Activation décodeur" },
+      { icon: Headphones, label: "Assistance 7j/7" },
+    ],
   },
-  { id: "phones", title: "Boutique Téléphones", short: "Téléphones", Icon: Smartphone },
-  { id: "banking", title: "Mobile Banking", short: "Mobile Banking", Icon: Wallet },
+  {
+    id: "phones",
+    tag: "SERVICE",
+    title: "Boutique Téléphones",
+    short: "Téléphones",
+    description: "Smartphones neufs et reconditionnés, accessoires et conseils personnalisés.",
+    cta: "Voir la boutique",
+    image: "/images/service-phones.png",
+    accentClass: "text-phones",
+    tagClass: "bg-phones/20 text-phones border-phones/30",
+    btnClass: "bg-phones hover:brightness-110",
+  },
+  {
+    id: "banking",
+    tag: "SERVICE",
+    title: "Mobile Banking",
+    short: "Mobile Banking",
+    description: "Transferts, paiements et gestion de compte depuis votre mobile en toute sécurité.",
+    cta: "En savoir plus",
+    image: "/images/service-banking.png",
+    accentClass: "text-banking",
+    tagClass: "bg-banking/20 text-banking border-banking/30",
+    btnClass: "bg-banking hover:brightness-110",
+  },
+];
+
+const features = [
+  { icon: Users, label: "1000+ Clients satisfaits" },
+  { icon: ShieldCheck, label: "Installation rapide et garantie" },
+  { icon: Headphones, label: "Support disponible 7j/7" },
+  { icon: ThumbsUp, label: "Services fiables et sécurisés" },
 ];
 
 function Home() {
@@ -44,9 +101,8 @@ function Home() {
     return () => window.removeEventListener("keydown", onKey);
   }, [next, prev]);
 
-  const left = services[(index - 1 + total) % total];
-  const right = services[(index + 1) % total];
-  const center = services[index];
+  const hero = services[index];
+  const sideServices = services.filter((s) => s.id !== hero.id);
 
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const onTouchStart = (e: React.TouchEvent) => setTouchStart(e.touches[0].clientX);
@@ -59,173 +115,221 @@ function Home() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <a href="/" className="flex items-center gap-2 font-black tracking-tight">
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-primary text-primary-foreground">C+</span>
-            <span className="hidden text-lg sm:inline">Canal Services</span>
+      <header className="sticky top-0 z-30 bg-background/95 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 lg:px-10">
+          <a href="/" className="flex items-center gap-3">
+            <img
+              src="/images/logo-area.png"
+              alt="NEXT TECH & SERVICES"
+              className="h-10 w-auto object-contain object-left"
+            />
           </a>
-          <nav className="flex items-center gap-2 sm:gap-6 text-sm font-medium">
-            <a href="#services" className="hidden text-muted-foreground transition-colors hover:text-foreground sm:inline">Services</a>
-            <a href="#contact" className="hidden text-muted-foreground transition-colors hover:text-foreground sm:inline">Contact</a>
-            <a href="tel:+221000000000" className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-primary-foreground shadow-sm transition-transform hover:scale-[1.02]">
-              <Phone className="h-4 w-4" />
-              <span>Nous appeler</span>
+
+          <nav className="hidden items-center gap-8 text-sm font-medium text-foreground/90 md:flex">
+            <a href="#" className="transition-colors hover:text-primary">
+              Accueil
+            </a>
+            <a href="#services" className="transition-colors hover:text-primary">
+              Services
+            </a>
+            <a href="#about" className="transition-colors hover:text-primary">
+              À propos
+            </a>
+            <a href="/contact" className="transition-colors hover:text-primary">
+              Contact
             </a>
           </nav>
+
+          <div className="flex items-center gap-3">
+            <a
+              href="tel:+221000000000"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-2 text-sm font-medium transition-colors hover:border-primary/40 hover:bg-card"
+            >
+              <Phone className="h-4 w-4 text-primary" />
+              <span className="hidden sm:inline">Nous appeler</span>
+            </a>
+            <a
+              href="https://wa.me/221000000000"
+              aria-label="WhatsApp"
+              className="grid h-10 w-10 place-items-center rounded-full bg-[oklch(0.62_0.19_145)] text-white transition-transform hover:scale-105"
+            >
+              <MessageCircle className="h-5 w-5" />
+            </a>
+          </div>
         </div>
       </header>
 
       <main
         id="services"
-        className="relative flex min-h-[100svh] flex-1 flex-col justify-center px-4 py-10 sm:px-8"
+        className="relative flex flex-1 flex-col px-4 py-6 sm:px-6 lg:px-10"
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
-        <div className="mx-auto hidden w-full max-w-7xl md:block">
-          <div className="grid grid-cols-[17.5%_65%_17.5%] items-stretch gap-8">
-            <SideCard service={left} onClick={prev} side="left" />
-            <CenterCard service={center} />
-            <SideCard service={right} onClick={next} side="right" />
-          </div>
-          <div className="mt-10 flex items-center justify-center gap-6">
-            <NavBtn label="Précédent" onClick={prev}><ChevronLeft className="h-5 w-5" /></NavBtn>
-            <Dots total={total} index={index} onSelect={go} />
-            <NavBtn label="Suivant" onClick={next}><ChevronRight className="h-5 w-5" /></NavBtn>
-          </div>
-        </div>
+        <div className="mx-auto w-full max-w-[1400px]">
+          <div className="grid gap-4 lg:grid-cols-[1fr_380px] lg:gap-5">
+            <HeroCarousel service={hero} onPrev={prev} onNext={next} index={index} total={total} onSelect={go} />
 
-        <div className="mx-auto flex w-full max-w-md flex-col md:hidden">
-          <MobileCard service={center} />
-          <div className="mt-6 flex items-center justify-between gap-4">
-            <NavBtn label="Précédent" onClick={prev}><ChevronLeft className="h-5 w-5" /></NavBtn>
-            <Dots total={total} index={index} onSelect={go} />
-            <NavBtn label="Suivant" onClick={next}><ChevronRight className="h-5 w-5" /></NavBtn>
+            <div className="hidden flex-col gap-4 lg:flex">
+              {sideServices.map((service) => (
+                <SideServiceCard key={service.id} service={service} onSelect={() => go(services.indexOf(service))} />
+              ))}
+            </div>
           </div>
+
+          <div className="mt-4 lg:hidden">
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              {services.map((service, i) => (
+                <button
+                  key={service.id}
+                  onClick={() => go(i)}
+                  className={`shrink-0 rounded-full px-4 py-1.5 text-xs font-semibold transition-colors ${
+                    i === index ? "bg-primary text-primary-foreground" : "bg-card text-muted-foreground"
+                  }`}
+                >
+                  {service.short}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <FeatureBar />
         </div>
       </main>
 
-      <footer id="contact" className="border-t border-border/60 bg-secondary text-secondary-foreground">
-        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-10 sm:grid-cols-3">
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest opacity-70">Contact</h3>
-            <ul className="mt-3 space-y-2 text-sm">
-              <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> +221 00 000 00 00</li>
-              <li className="flex items-center gap-2"><Mail className="h-4 w-4" /> contact@canalservices.app</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest opacity-70">Suivez-nous</h3>
-            <div className="mt-3 flex gap-3">
-              <a href="#" aria-label="Facebook" className="grid h-9 w-9 place-items-center rounded-full bg-white/10 transition-colors hover:bg-primary"><Facebook className="h-4 w-4" /></a>
-              <a href="#" aria-label="Instagram" className="grid h-9 w-9 place-items-center rounded-full bg-white/10 transition-colors hover:bg-primary"><Instagram className="h-4 w-4" /></a>
-              <a href="#" aria-label="Twitter" className="grid h-9 w-9 place-items-center rounded-full bg-white/10 transition-colors hover:bg-primary"><Twitter className="h-4 w-4" /></a>
-            </div>
-          </div>
-          <div className="sm:text-right">
-            <p className="text-xs opacity-70">© {new Date().getFullYear()} Canal Services. Tous droits réservés.</p>
-          </div>
-        </div>
+      <footer id="contact" className="mt-auto border-t border-border/40 bg-background px-6 py-6 text-center text-xs text-muted-foreground lg:px-10">
+        <p>© {new Date().getFullYear()} NEXT TECH &amp; SERVICES. Tous droits réservés.</p>
       </footer>
     </div>
   );
 }
 
-function NavBtn({ label, onClick, children }: { label: string; onClick: () => void; children: React.ReactNode }) {
+function HeroCarousel({
+  service,
+  onPrev,
+  onNext,
+  index,
+  total,
+  onSelect,
+}: {
+  service: Service;
+  onPrev: () => void;
+  onNext: () => void;
+  index: number;
+  total: number;
+  onSelect: (i: number) => void;
+}) {
   return (
-    <button
-      aria-label={label}
-      onClick={onClick}
-      className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-border bg-card text-foreground shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground"
-    >
-      {children}
-    </button>
-  );
-}
+    <article className="relative min-h-[420px] overflow-hidden rounded-3xl sm:min-h-[520px] lg:min-h-[580px]">
+      <img src={service.image} alt="" className="absolute inset-0 h-full w-full object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
 
-function CenterCard({ service }: { service: Service }) {
-  const { Icon } = service;
-  return (
-    <article className="relative flex flex-col items-center justify-center gap-6 rounded-3xl bg-card p-8 text-center shadow-[0_20px_60px_-20px_oklch(0.7_0.19_45/0.35)] ring-1 ring-border sm:p-12">
-      <div className="grid h-28 w-28 place-items-center rounded-3xl bg-primary/10 text-primary sm:h-36 sm:w-36">
-        <Icon className="h-14 w-14 sm:h-20 sm:w-20" strokeWidth={1.75} />
-      </div>
-      <h1 className="text-3xl font-black tracking-tight sm:text-5xl">{service.title}</h1>
-      {service.subtitles && (
-        <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm font-medium text-muted-foreground sm:text-base">
-          {service.subtitles.map((s, i) => (
-            <span key={s} className="flex items-center gap-3">
-              {i > 0 && <span className="text-primary">•</span>}
-              {s}
-            </span>
-          ))}
-        </p>
-      )}
-      {service.cta && (
-        <button className="mt-2 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-[1.03]">
-          {service.cta}
-        </button>
-      )}
-    </article>
-  );
-}
+      <button
+        onClick={onPrev}
+        aria-label="Précédent"
+        className="absolute left-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60 sm:left-5 sm:h-12 sm:w-12"
+      >
+        <ChevronLeft className="h-6 w-6" />
+      </button>
+      <button
+        onClick={onNext}
+        aria-label="Suivant"
+        className="absolute right-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60 sm:right-5 sm:h-12 sm:w-12"
+      >
+        <ChevronRight className="h-6 w-6" />
+      </button>
 
-function SideCard({ service, onClick, side }: { service: Service; onClick: () => void; side: "left" | "right" }) {
-  const { Icon } = service;
-  return (
-    <button
-      onClick={onClick}
-      aria-label={`Voir ${service.title}`}
-      className={`group relative flex flex-col items-center justify-center gap-3 rounded-3xl bg-card/70 p-6 text-center opacity-70 ring-1 ring-border transition-all hover:opacity-100 hover:shadow-lg ${
-        side === "left" ? "hover:-translate-x-1" : "hover:translate-x-1"
-      }`}
-    >
-      <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary/10 text-primary">
-        <Icon className="h-7 w-7" strokeWidth={1.75} />
-      </div>
-      <h3 className="text-sm font-bold sm:text-base">{service.short}</h3>
-    </button>
-  );
-}
+      <div className="relative z-10 flex h-full flex-col justify-end p-6 sm:p-10 lg:max-w-[70%] lg:p-12">
+        <span
+          className={`mb-4 inline-flex w-fit rounded-full border px-3 py-1 text-[10px] font-bold tracking-widest sm:text-xs ${service.tagClass}`}
+        >
+          {service.tag}
+        </span>
+        <h1 className="text-3xl font-black leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+          {service.title}
+        </h1>
+        <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/80 sm:text-base">{service.description}</p>
 
-function MobileCard({ service }: { service: Service }) {
-  const { Icon } = service;
-  return (
-    <article className="flex flex-col items-center gap-5 rounded-3xl bg-card p-8 text-center shadow-xl ring-1 ring-border">
-      <div className="grid h-24 w-24 place-items-center rounded-3xl bg-primary/10 text-primary">
-        <Icon className="h-12 w-12" strokeWidth={1.75} />
-      </div>
-      <h1 className="text-2xl font-black tracking-tight">{service.title}</h1>
-      {service.subtitles && (
-        <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs font-medium text-muted-foreground">
-          {service.subtitles.map((s, i) => (
-            <span key={s} className="flex items-center gap-2">
-              {i > 0 && <span className="text-primary">•</span>}
-              {s}
-            </span>
-          ))}
-        </p>
-      )}
-      {service.cta && (
-        <button className="mt-1 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25">
-          {service.cta}
-        </button>
-      )}
-    </article>
-  );
-}
+        {service.features && (
+          <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+            {service.features.map(({ icon: Icon, label }) => (
+              <li key={label} className="flex items-center gap-2 text-xs text-white/75 sm:text-sm">
+                <Icon className="h-4 w-4 text-primary" strokeWidth={1.75} />
+                {label}
+              </li>
+            ))}
+          </ul>
+        )}
 
-function Dots({ total, index, onSelect }: { total: number; index: number; onSelect: (i: number) => void }) {
-  return (
-    <div className="flex items-center gap-2">
-      {Array.from({ length: total }).map((_, i) => (
         <button
-          key={i}
-          aria-label={`Aller au service ${i + 1}`}
-          onClick={() => onSelect(i)}
-          className={`h-2.5 rounded-full transition-all ${i === index ? "w-8 bg-primary" : "w-2.5 bg-border hover:bg-muted-foreground"}`}
-        />
+          className={`mt-6 inline-flex w-fit items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-[1.02] ${service.btnClass}`}
+        >
+          {service.cta}
+          <ArrowRight className="h-4 w-4" />
+        </button>
+      </div>
+
+      <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2">
+        {Array.from({ length: total }).map((_, i) => (
+          <button
+            key={i}
+            aria-label={`Aller au service ${i + 1}`}
+            onClick={() => onSelect(i)}
+            className={`rounded-full transition-all ${
+              i === index ? "h-2.5 w-8 bg-primary" : "h-2.5 w-2.5 bg-white/50 hover:bg-white/80"
+            }`}
+          />
+        ))}
+      </div>
+    </article>
+  );
+}
+
+function SideServiceCard({ service, onSelect }: { service: Service; onSelect: () => void }) {
+  return (
+    <button
+      onClick={onSelect}
+      className="group relative flex min-h-[270px] flex-1 flex-col justify-end overflow-hidden rounded-3xl text-left transition-transform hover:scale-[1.01]"
+    >
+      <img src={service.image} alt="" className="absolute inset-0 h-full w-full object-cover" />
+      <div
+        className={`absolute inset-0 ${
+          service.id === "phones"
+            ? "bg-gradient-to-br from-[oklch(0.35_0.15_260)]/90 via-black/70 to-black/90"
+            : "bg-gradient-to-br from-[oklch(0.35_0.12_145)]/90 via-black/70 to-black/90"
+        }`}
+      />
+      <div className="relative z-10 p-6">
+        <span
+          className={`inline-flex rounded-full border px-2.5 py-0.5 text-[10px] font-bold tracking-widest ${service.tagClass}`}
+        >
+          {service.tag}
+        </span>
+        <h3 className="mt-2 text-xl font-bold text-white">{service.title}</h3>
+        <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-white/70">{service.description}</p>
+        <span
+          className={`mt-4 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold text-white ${service.btnClass}`}
+        >
+          {service.cta}
+          <ArrowRight className="h-3.5 w-3.5" />
+        </span>
+      </div>
+    </button>
+  );
+}
+
+function FeatureBar() {
+  return (
+    <section
+      id="about"
+      className="mt-5 grid grid-cols-2 gap-4 rounded-3xl bg-feature-bar px-6 py-6 text-feature-bar-foreground sm:grid-cols-4 sm:gap-6 sm:px-10 sm:py-7"
+    >
+      {features.map(({ icon: Icon, label }) => (
+        <div key={label} className="flex flex-col items-center gap-2 text-center sm:flex-row sm:text-left">
+          <Icon className="h-5 w-5 shrink-0 text-muted-foreground" strokeWidth={1.75} />
+          <span className="text-xs font-medium leading-snug sm:text-sm">{label}</span>
+        </div>
       ))}
-    </div>
+    </section>
   );
 }

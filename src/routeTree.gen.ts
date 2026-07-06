@@ -9,38 +9,92 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactIndexRouteImport } from './routes/contact/index'
+import { Route as ContactTelephoneRouteImport } from './routes/contact/telephone'
+import { Route as ContactInstallationRouteImport } from './routes/contact/installation'
 
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactIndexRoute = ContactIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ContactRoute,
+} as any)
+const ContactTelephoneRoute = ContactTelephoneRouteImport.update({
+  id: '/telephone',
+  path: '/telephone',
+  getParentRoute: () => ContactRoute,
+} as any)
+const ContactInstallationRoute = ContactInstallationRouteImport.update({
+  id: '/installation',
+  path: '/installation',
+  getParentRoute: () => ContactRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRouteWithChildren
+  '/contact/installation': typeof ContactInstallationRoute
+  '/contact/telephone': typeof ContactTelephoneRoute
+  '/contact/': typeof ContactIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact/installation': typeof ContactInstallationRoute
+  '/contact/telephone': typeof ContactTelephoneRoute
+  '/contact': typeof ContactIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRouteWithChildren
+  '/contact/installation': typeof ContactInstallationRoute
+  '/contact/telephone': typeof ContactTelephoneRoute
+  '/contact/': typeof ContactIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contact'
+    | '/contact/installation'
+    | '/contact/telephone'
+    | '/contact/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/contact/installation' | '/contact/telephone' | '/contact'
+  id:
+    | '__root__'
+    | '/'
+    | '/contact'
+    | '/contact/installation'
+    | '/contact/telephone'
+    | '/contact/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,12 +102,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact/': {
+      id: '/contact/'
+      path: '/'
+      fullPath: '/contact/'
+      preLoaderRoute: typeof ContactIndexRouteImport
+      parentRoute: typeof ContactRoute
+    }
+    '/contact/telephone': {
+      id: '/contact/telephone'
+      path: '/telephone'
+      fullPath: '/contact/telephone'
+      preLoaderRoute: typeof ContactTelephoneRouteImport
+      parentRoute: typeof ContactRoute
+    }
+    '/contact/installation': {
+      id: '/contact/installation'
+      path: '/installation'
+      fullPath: '/contact/installation'
+      preLoaderRoute: typeof ContactInstallationRouteImport
+      parentRoute: typeof ContactRoute
+    }
   }
 }
 
+interface ContactRouteChildren {
+  ContactInstallationRoute: typeof ContactInstallationRoute
+  ContactTelephoneRoute: typeof ContactTelephoneRoute
+  ContactIndexRoute: typeof ContactIndexRoute
+}
+
+const ContactRouteChildren: ContactRouteChildren = {
+  ContactInstallationRoute: ContactInstallationRoute,
+  ContactTelephoneRoute: ContactTelephoneRoute,
+  ContactIndexRoute: ContactIndexRoute,
+}
+
+const ContactRouteWithChildren =
+  ContactRoute._addFileChildren(ContactRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
