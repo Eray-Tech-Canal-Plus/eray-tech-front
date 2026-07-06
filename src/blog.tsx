@@ -201,7 +201,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
           className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full blur-3xl opacity-20"
           style={{ background: "radial-gradient(circle, #F97316, transparent 70%)" }}
         />
-        <div className="max-w-3xl mx-auto px-6 md:px-10 pt-14 pb-16 relative">
+        <div className="w-full px-6 md:px-10 pt-14 pb-16 relative">
           <button
             onClick={onBack}
             className="et-link text-white/70 hover:text-white text-sm font-medium flex items-center gap-1.5 mb-8"
@@ -214,7 +214,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
           >
             {article.catLabel}
           </span>
-          <h1 className="display text-white font-extrabold text-3xl md:text-[44px] leading-[1.1] mb-6">
+          <h1 className="display text-white font-extrabold text-3xl md:text-[44px] leading-[1.1] mb-6 max-w-3xl">
             {article.title}
           </h1>
           <div className="flex items-center gap-3">
@@ -231,9 +231,9 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-6 md:px-10">
+      <div className="w-full px-6 md:px-10">
         <div
-          className="et-fade-up rounded-[24px] overflow-hidden h-56 md:h-72 -translate-y-10 md:-translate-y-12 shadow-xl"
+          className="et-fade-up rounded-[24px] overflow-hidden h-56 md:h-72 -translate-y-10 md:-translate-y-12 shadow-xl max-w-3xl mx-auto"
           style={{ background: "#1F1F1F" }}
         >
           <img
@@ -245,7 +245,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
         </div>
       </div>
 
-      <article className="max-w-2xl mx-auto px-6 md:px-10 pb-16 -mt-4 md:-mt-6">
+      <article className="w-full px-6 md:px-10 pb-16 -mt-4 md:-mt-6 max-w-2xl mx-auto">
         <p className="text-lg leading-relaxed text-[#1F1F1F] font-medium mb-6">{article.excerpt}</p>
         {article.content.map((p, i) => (
           <p key={i} className="text-[#1F1F1F]/85 text-[15px] leading-[1.85] mb-5">
@@ -268,7 +268,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
 
       {related.length > 0 && (
         <section className="py-16 bg-neutral-100">
-          <div className="max-w-5xl mx-auto px-6 md:px-10">
+          <div className="w-full px-6 md:px-10">
             <h3 className="display text-xl font-bold mb-8">À lire aussi</h3>
             <div className="grid sm:grid-cols-3 gap-6">
               {related.map((a) => (
@@ -386,7 +386,7 @@ export default function ErayTechBlog() {
           style={{ background: "radial-gradient(circle, #FFFFFF, transparent 70%)" }}
         />
 
-        <div className="max-w-7xl mx-auto px-6 md:px-10 pt-20 pb-24 relative">
+        <div className="w-full px-6 md:px-10 pt-20 pb-24 relative">
           <div className="flex items-center gap-2 mb-6">
             <span style={{ background: "#F97316" }} className="w-2 h-2 rounded-full inline-block" />
             <span className="text-orange-500 text-xs font-semibold tracking-[0.2em] uppercase">Le Mag Eray-Tech</span>
@@ -403,7 +403,7 @@ export default function ErayTechBlog() {
       {/* Featured card overlapping hero/white section — kept outside the hero's
           overflow-hidden box so it never gets clipped, with a light negative margin
           to sit just over the hero/white seam. */}
-      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10 -mt-10 md:-mt-12">
+      <div className="w-full px-6 md:px-10 relative z-10 -mt-10 md:-mt-12">
         <div className="et-card et-fade-up bg-white rounded-[24px] border border-gray-200 shadow-xl grid md:grid-cols-2 overflow-hidden">
           <div className="et-thumb-wrap relative h-56 md:h-auto" style={{ background: "#1F1F1F" }}>
             <div className="et-thumb absolute inset-0">
@@ -453,7 +453,7 @@ export default function ErayTechBlog() {
       <div className="h-10 md:h-12 bg-white" />
 
       {/* FILTERS */}
-      <section className="max-w-7xl mx-auto px-6 md:px-10">
+      <section className="w-full px-6 md:px-10">
         <div className="flex items-center justify-between flex-wrap gap-4 mb-10">
           <h3 className="display text-xl font-bold">Tous les articles</h3>
           <div className="flex items-center gap-2 flex-wrap">
@@ -546,7 +546,7 @@ export default function ErayTechBlog() {
           className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full blur-3xl opacity-20 -translate-y-1/2"
           style={{ background: "radial-gradient(circle, #F97316, transparent 70%)" }}
         />
-        <div className="max-w-4xl mx-auto px-6 md:px-10 py-20 text-center relative">
+        <div className="w-full px-6 md:px-10 py-20 text-center relative">
           <div style={{ background: "#F97316" }} className="w-11 h-11 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <Mail size={19} color="#000000" strokeWidth={2.5} />
           </div>
