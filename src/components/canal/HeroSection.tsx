@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import heroTechnicien from "@/assets/hero-technicien.jpg";
-
 export function HeroSection() {
   const [nom, setNom] = useState("");
   const [tel, setTel] = useState("");
@@ -74,7 +72,7 @@ export function HeroSection() {
         <div className="relative mx-auto w-full max-w-md">
           <div className="absolute -inset-6 rounded-[2rem] bg-gradient-brand opacity-20 blur-2xl" />
           <img
-            src={heroTechnicien}
+            src={"https://images.unsplash.com/photo-1581091012184-5c8783adc23a?w=1600"}
             alt="Technicien installateur Canal+ avec antenne satellite"
             width={1024}
             height={1152}

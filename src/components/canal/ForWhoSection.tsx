@@ -1,11 +1,7 @@
-import cardAntenne from "@/assets/card-antenne.jpg";
-import cardTv from "@/assets/card-tv.jpg";
-import cardClient from "@/assets/card-client.jpg";
-
 const cards = [
   {
     num: "1",
-    image: cardAntenne,
+    image: "https://images.unsplash.com/photo-1518623489648-a173ef7824f3?w=800",
     alt: "Pose d'antenne parabolique sur un toit",
     title: "Pose & orientation d'antenne",
     text: (
@@ -18,7 +14,7 @@ const cards = [
   },
   {
     num: "2",
-    image: cardTv,
+    image: "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=800",
     alt: "Décodeur Canal+ raccordé à une télévision",
     title: "Décodeur & mise en service",
     text: (
@@ -31,7 +27,7 @@ const cards = [
   },
   {
     num: "3",
-    image: cardClient,
+    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800",
     alt: "Famille satisfaite regardant la télévision",
     title: "Réglage & garantie signal",
     text: (

@@ -1,10 +1,3 @@
-import phone1 from "@/assets/phone-1.jpg";
-import phone2 from "@/assets/phone-2.jpg";
-import phone3 from "@/assets/phone-3.jpg";
-import phone4 from "@/assets/phone-4.jpg";
-import phone5 from "@/assets/phone-5.jpg";
-import phone6 from "@/assets/phone-6.jpg";
-
 export type Product = {
   id: number;
   name: string;
@@ -25,7 +18,7 @@ export type Product = {
   specs: { label: string; value: string }[];
 };
 
-const gallery = [phone1, phone2, phone3, phone4, phone5, phone6];
+const gallery = ["https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?w=600", "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600", "https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=600", "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=600", "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600", "https://images.unsplash.com/photo-1616348436168-de43ad0db179?w=600"];
 
 function build(
   id: number,
@@ -74,18 +67,18 @@ function build(
 }
 
 export const products: Product[] = [
-  build(1, "iPhone 15 Pro", "Apple", "Smartphones", 1299, 1499, 4.9, 245, phone1, ["Noir", "Argent"], ["128 Go", "256 Go", "512 Go", "1 To"]),
-  build(2, "Galaxy S24 Ultra", "Samsung", "Smartphones", 1199, 1399, 4.8, 187, phone2, ["Noir", "Blanc"], ["256 Go", "512 Go", "1 To"]),
-  build(3, "Pixel 8 Rouge", "Google", "Smartphones", 799, 999, 5.0, 132, phone3, ["Rose", "Noir"], ["128 Go", "256 Go"]),
-  build(4, "Galaxy Z Fold 5", "Samsung", "Pliables", 1899, 2099, 4.7, 98, phone4, ["Noir", "Or"], ["256 Go", "512 Go", "1 To"]),
-  build(5, "Xiaomi 14 Pro", "Xiaomi", "Smartphones", 899, 1099, 4.6, 156, phone5, ["Blanc", "Noir"], ["128 Go", "256 Go", "512 Go"]),
-  build(6, "iPhone 15 Or", "Apple", "Smartphones", 1099, 1299, 4.9, 210, phone6, ["Or", "Rose"], ["128 Go", "256 Go", "512 Go"]),
-  build(7, "OnePlus 12", "OnePlus", "Smartphones", 749, 899, 4.7, 88, phone1, ["Noir", "Argent"], ["128 Go", "256 Go"]),
-  build(8, "Pixel 8 Pro", "Google", "Smartphones", 999, 1199, 4.8, 121, phone2, ["Noir", "Blanc"], ["128 Go", "256 Go", "512 Go"]),
-  build(9, "Galaxy A55", "Samsung", "Basiques", 449, 549, 4.5, 73, phone5, ["Blanc", "Noir"], ["64 Go", "128 Go", "256 Go"]),
-  build(10, "Xiaomi Redmi Note 13", "Xiaomi", "Basiques", 299, 399, 4.4, 64, phone4, ["Noir", "Blanc"], ["64 Go", "128 Go"]),
-  build(11, "iPhone 14", "Apple", "Reconditionnés", 799, 999, 4.7, 199, phone3, ["Rose", "Noir"], ["128 Go", "256 Go"]),
-  build(12, "Nothing Phone 2", "Nothing", "Gaming", 599, 749, 4.6, 55, phone6, ["Blanc", "Or"], ["128 Go", "256 Go"], false),
+  build(1, "iPhone 15 Pro", "Apple", "Smartphones", 1299, 1499, 4.9, 245, "https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?w=600", ["Noir", "Argent"], ["128 Go", "256 Go", "512 Go", "1 To"]),
+  build(2, "Galaxy S24 Ultra", "Samsung", "Smartphones", 1199, 1399, 4.8, 187, "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600", ["Noir", "Blanc"], ["256 Go", "512 Go", "1 To"]),
+  build(3, "Pixel 8 Rouge", "Google", "Smartphones", 799, 999, 5.0, 132, "https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=600", ["Rose", "Noir"], ["128 Go", "256 Go"]),
+  build(4, "Galaxy Z Fold 5", "Samsung", "Pliables", 1899, 2099, 4.7, 98, "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=600", ["Noir", "Or"], ["256 Go", "512 Go", "1 To"]),
+  build(5, "Xiaomi 14 Pro", "Xiaomi", "Smartphones", 899, 1099, 4.6, 156, "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600", ["Blanc", "Noir"], ["128 Go", "256 Go", "512 Go"]),
+  build(6, "iPhone 15 Or", "Apple", "Smartphones", 1099, 1299, 4.9, 210, "https://images.unsplash.com/photo-1616348436168-de43ad0db179?w=600", ["Or", "Rose"], ["128 Go", "256 Go", "512 Go"]),
+  build(7, "OnePlus 12", "OnePlus", "Smartphones", 749, 899, 4.7, 88, "https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?w=600", ["Noir", "Argent"], ["128 Go", "256 Go"]),
+  build(8, "Pixel 8 Pro", "Google", "Smartphones", 999, 1199, 4.8, 121, "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600", ["Noir", "Blanc"], ["128 Go", "256 Go", "512 Go"]),
+  build(9, "Galaxy A55", "Samsung", "Basiques", 449, 549, 4.5, 73, "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600", ["Blanc", "Noir"], ["64 Go", "128 Go", "256 Go"]),
+  build(10, "Xiaomi Redmi Note 13", "Xiaomi", "Basiques", 299, 399, 4.4, 64, "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=600", ["Noir", "Blanc"], ["64 Go", "128 Go"]),
+  build(11, "iPhone 14", "Apple", "Reconditionnés", 799, 999, 4.7, 199, "https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=600", ["Rose", "Noir"], ["128 Go", "256 Go"]),
+  build(12, "Nothing Phone 2", "Nothing", "Gaming", 599, 749, 4.6, 55, "https://images.unsplash.com/photo-1616348436168-de43ad0db179?w=600", ["Blanc", "Or"], ["128 Go", "256 Go"], false),
 ];
 
 export function getProduct(id: number) {

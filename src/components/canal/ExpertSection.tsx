@@ -1,5 +1,3 @@
-import expertPortrait from "@/assets/expert-portrait.jpg";
-
 const stats = [
   { value: "+2 500", label: "installations réalisées" },
   { value: "48 h", label: "délai d'intervention" },
@@ -14,7 +12,7 @@ export function ExpertSection() {
         <div className="relative mx-auto w-full max-w-sm">
           <div className="absolute -inset-5 rounded-[2rem] bg-gradient-brand opacity-20 blur-2xl" />
           <img
-            src={expertPortrait}
+            src={"https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800"}
             alt="Julien Marchand, technicien installateur satellite"
             loading="lazy"
             width={1024}
