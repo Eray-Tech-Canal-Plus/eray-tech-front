@@ -194,7 +194,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
   const related = ARTICLES.filter((a) => a.category === article.category && a.id !== article.id).slice(0, 3);
 
   return (
-    <div className="et-fade-up" style={{ fontFamily: "'Inter', sans-serif", background: "#FFFFFF", color: "#1F1F1F" }}>
+    <div className="et-fade-up w-full" style={{ fontFamily: "'Inter', sans-serif", background: "#FFFFFF", color: "#1F1F1F" }}>
       <div className="relative overflow-hidden bg-black">
         <div className="et-scan" />
         <div
@@ -335,7 +335,7 @@ export default function ErayTechBlog() {
   }
 
   return (
-    <div style={{ fontFamily: "'Inter', sans-serif", background: "#FFFFFF", color: "#1F1F1F" }}>
+    <div className="w-full" style={{ fontFamily: "'Inter', sans-serif", background: "#FFFFFF", color: "#1F1F1F" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
         .display { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
@@ -386,7 +386,7 @@ export default function ErayTechBlog() {
           style={{ background: "radial-gradient(circle, #FFFFFF, transparent 70%)" }}
         />
 
-        <div className="max-w-7xl mx-auto px-6 md:px-10 pt-20 pb-28 relative">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 pt-20 pb-24 relative">
           <div className="flex items-center gap-2 mb-6">
             <span style={{ background: "#F97316" }} className="w-2 h-2 rounded-full inline-block" />
             <span className="text-orange-500 text-xs font-semibold tracking-[0.2em] uppercase">Le Mag Eray-Tech</span>
@@ -398,57 +398,59 @@ export default function ErayTechBlog() {
             Coulisses techniques, actualités séries, sport en direct et culture numérique — décryptés par notre rédaction.
           </p>
         </div>
+      </section>
 
-        {/* Featured card overlapping hero/white section */}
-        <div className="max-w-7xl mx-auto px-6 md:px-10 relative">
-          <div className="et-card et-fade-up bg-white rounded-[24px] border border-gray-200 shadow-xl grid md:grid-cols-2 overflow-hidden translate-y-16 md:translate-y-20">
-            <div className="et-thumb-wrap relative h-56 md:h-auto" style={{ background: "#1F1F1F" }}>
-              <div className="et-thumb absolute inset-0">
-                <img
-                  src={featured.image}
-                  alt={featured.imageAlt}
-                  loading="lazy"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+      {/* Featured card overlapping hero/white section — kept outside the hero's
+          overflow-hidden box so it never gets clipped, with a light negative margin
+          to sit just over the hero/white seam. */}
+      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10 -mt-10 md:-mt-12">
+        <div className="et-card et-fade-up bg-white rounded-[24px] border border-gray-200 shadow-xl grid md:grid-cols-2 overflow-hidden">
+          <div className="et-thumb-wrap relative h-56 md:h-auto" style={{ background: "#1F1F1F" }}>
+            <div className="et-thumb absolute inset-0">
+              <img
+                src={featured.image}
+                alt={featured.imageAlt}
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
             </div>
-            <div className="p-8 md:p-10 flex flex-col justify-center">
-              <span
-                style={{ background: "#FFEDD5", color: "#F97316" }}
-                className="inline-block w-fit text-xs font-semibold px-3 py-1 rounded-full mb-4"
-              >
-                {featured.catLabel}
-              </span>
-              <h2 className="display text-2xl md:text-[28px] font-bold leading-tight mb-3">
-                {featured.title}
-              </h2>
-              <p className="text-gray-500 text-sm leading-relaxed mb-6">{featured.excerpt}</p>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-semibold bg-black">
-                    {featured.author.split(" ")[1]?.[0] || featured.author[0]}
-                  </div>
-                  <div className="text-xs text-gray-500">
-                    <div className="font-medium text-[#1F1F1F]">{featured.author}</div>
-                    <div className="flex items-center gap-1">
-                      {featured.date} · <Clock size={11} className="inline" /> {featured.read}
-                    </div>
+          </div>
+          <div className="p-8 md:p-10 flex flex-col justify-center">
+            <span
+              style={{ background: "#FFEDD5", color: "#F97316" }}
+              className="inline-block w-fit text-xs font-semibold px-3 py-1 rounded-full mb-4"
+            >
+              {featured.catLabel}
+            </span>
+            <h2 className="display text-2xl md:text-[28px] font-bold leading-tight mb-3">
+              {featured.title}
+            </h2>
+            <p className="text-gray-500 text-sm leading-relaxed mb-6">{featured.excerpt}</p>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-semibold bg-black">
+                  {featured.author.split(" ")[1]?.[0] || featured.author[0]}
+                </div>
+                <div className="text-xs text-gray-500">
+                  <div className="font-medium text-[#1F1F1F]">{featured.author}</div>
+                  <div className="flex items-center gap-1">
+                    {featured.date} · <Clock size={11} className="inline" /> {featured.read}
                   </div>
                 </div>
-                <button
-                  onClick={() => openArticle(featured.id)}
-                  className="et-link text-sm font-semibold text-black flex items-center gap-1"
-                >
-                  Lire <ArrowRight size={15} />
-                </button>
               </div>
+              <button
+                onClick={() => openArticle(featured.id)}
+                className="et-link text-sm font-semibold text-black flex items-center gap-1"
+              >
+                Lire <ArrowRight size={15} />
+              </button>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* SPACER for overlap */}
-      <div className="h-16 md:h-20 bg-white" />
+      {/* SPACER below the overlapping card */}
+      <div className="h-10 md:h-12 bg-white" />
 
       {/* FILTERS */}
       <section className="max-w-7xl mx-auto px-6 md:px-10">
