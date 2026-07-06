@@ -186,7 +186,7 @@ function Pattern({ type }: PatternProps) {
   if (type === "waves") {
     return (
       <svg viewBox="0 0 300 200" {...common} preserveAspectRatio="xMidYMid slice">
-        <path d="M0 120 Q 40 90 75 120 T 150 120 T 225 120 T 300 120" fill="none" stroke="#FF2D8D" strokeWidth="3" opacity="0.9" />
+        <path d="M0 120 Q 40 90 75 120 T 150 120 T 225 120 T 300 120" fill="none" stroke="#F97316" strokeWidth="3" opacity="0.9" />
         <path d="M0 150 Q 40 120 75 150 T 150 150 T 225 150 T 300 150" fill="none" stroke="#FFFFFF" strokeWidth="2" opacity="0.35" />
         <path d="M0 90 Q 40 60 75 90 T 150 90 T 225 90 T 300 90" fill="none" stroke="#FFFFFF" strokeWidth="2" opacity="0.2" />
       </svg>
@@ -201,7 +201,7 @@ function Pattern({ type }: PatternProps) {
         {Array.from({ length: 4 }).map((_, i) => (
           <line key={"h" + i} x1="0" y1={i * 55} x2="300" y2={i * 55} stroke="#FFFFFF" strokeWidth="1" opacity="0.18" />
         ))}
-        <circle cx="150" cy="100" r="34" fill="#FF2D8D" opacity="0.9" />
+        <circle cx="150" cy="100" r="34" fill="#F97316" opacity="0.9" />
       </svg>
     );
   }
@@ -213,7 +213,7 @@ function Pattern({ type }: PatternProps) {
             const cx = 15 + c * 30;
             const cy = 15 + r * 28;
             const hot = (r === 3 && (c === 4 || c === 5)) || (r === 2 && c === 4) || (r === 4 && c === 5);
-            return <circle key={r + "-" + c} cx={cx} cy={cy} r={hot ? 5 : 2.4} fill={hot ? "#FF2D8D" : "#FFFFFF"} opacity={hot ? 0.95 : 0.22} />;
+            return <circle key={r + "-" + c} cx={cx} cy={cy} r={hot ? 5 : 2.4} fill={hot ? "#F97316" : "#FFFFFF"} opacity={hot ? 0.95 : 0.22} />;
           })
         )}
       </svg>
@@ -222,7 +222,7 @@ function Pattern({ type }: PatternProps) {
   if (type === "circles") {
     return (
       <svg viewBox="0 0 300 200" {...common} preserveAspectRatio="xMidYMid slice">
-        <circle cx="150" cy="100" r="20" fill="none" stroke="#FF2D8D" strokeWidth="3" />
+        <circle cx="150" cy="100" r="20" fill="none" stroke="#F97316" strokeWidth="3" />
         <circle cx="150" cy="100" r="45" fill="none" stroke="#FFFFFF" strokeWidth="2" opacity="0.4" />
         <circle cx="150" cy="100" r="70" fill="none" stroke="#FFFFFF" strokeWidth="2" opacity="0.22" />
         <circle cx="150" cy="100" r="95" fill="none" stroke="#FFFFFF" strokeWidth="1.5" opacity="0.12" />
@@ -238,7 +238,7 @@ function Pattern({ type }: PatternProps) {
           y={40 + Math.abs(Math.sin(i)) * 90}
           width="10"
           height={70 - Math.abs(Math.sin(i)) * 40}
-          fill={i % 5 === 0 ? "#FF2D8D" : "#FFFFFF"}
+          fill={i % 5 === 0 ? "#F97316" : "#FFFFFF"}
           opacity={i % 5 === 0 ? 0.95 : 0.2}
         />
       ))}
@@ -257,11 +257,11 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
 
   return (
     <div className="et-fade-up" style={{ fontFamily: "'Inter', sans-serif", background: "#FFFFFF", color: "#1F1F1F" }}>
-      <div style={{ background: "#000000" }} className="relative overflow-hidden">
+      <div className="relative overflow-hidden bg-black">
         <div className="et-scan" />
         <div
           className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full blur-3xl opacity-20"
-          style={{ background: "radial-gradient(circle, #FF2D8D, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, #F97316, transparent 70%)" }}
         />
         <div className="max-w-3xl mx-auto px-6 md:px-10 pt-14 pb-16 relative">
           <button
@@ -271,7 +271,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
             <ArrowRight size={15} style={{ transform: "rotate(180deg)" }} /> Retour au Mag
           </button>
           <span
-            style={{ background: "#FF2D8D" }}
+            style={{ background: "#F97316" }}
             className="inline-block text-white text-xs font-semibold px-3 py-1 rounded-full mb-5"
           >
             {article.catLabel}
@@ -280,7 +280,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
             {article.title}
           </h1>
           <div className="flex items-center gap-3">
-            <div style={{ background: "#FF2D8D" }} className="w-9 h-9 rounded-full flex items-center justify-center text-black text-xs font-bold">
+            <div style={{ background: "#F97316" }} className="w-9 h-9 rounded-full flex items-center justify-center text-black text-xs font-bold">
               {article.author.split(" ")[1]?.[0] || article.author[0]}
             </div>
             <div className="text-xs text-white/55">
@@ -310,9 +310,9 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
           </p>
         ))}
 
-        <div className="flex items-center justify-between mt-10 pt-8 border-t border-[#E5E7EB]">
+        <div className="flex items-center justify-between mt-10 pt-8 border-t border-gray-200">
           <span
-            style={{ background: "#FFE3F0", color: "#FF2D8D" }}
+            style={{ background: "#FFEDD5", color: "#F97316" }}
             className="text-xs font-semibold px-3 py-1.5 rounded-full"
           >
             {article.catLabel}
@@ -324,7 +324,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
       </article>
 
       {related.length > 0 && (
-        <section style={{ background: "#F5F5F5" }} className="py-16">
+        <section className="py-16 bg-neutral-100">
           <div className="max-w-5xl mx-auto px-6 md:px-10">
             <h3 className="display text-xl font-bold mb-8">À lire aussi</h3>
             <div className="grid sm:grid-cols-3 gap-6">
@@ -335,7 +335,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e: KeyboardEvent<HTMLElement>) => e.key === "Enter" && onOpen(a.id)}
-                  className="et-card bg-white rounded-[20px] border border-[#E5E7EB] shadow-sm overflow-hidden flex flex-col cursor-pointer"
+                  className="et-card bg-white rounded-[20px] border border-gray-200 shadow-sm overflow-hidden flex flex-col cursor-pointer"
                 >
                   <div className="et-thumb-wrap relative h-32" style={{ background: "#1F1F1F" }}>
                     <div className="et-thumb absolute inset-0">
@@ -344,7 +344,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
                   </div>
                   <div className="p-5">
                     <h4 className="display font-bold text-sm leading-snug mb-2">{a.title}</h4>
-                    <span className="text-xs text-[#6B7280] flex items-center gap-1">
+                    <span className="text-xs text-gray-500 flex items-center gap-1">
                       <Clock size={11} /> {a.read}
                     </span>
                   </div>
@@ -393,7 +393,7 @@ export default function ErayTechBlog() {
         .display { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
         .et-scan {
           position: absolute; left: 0; right: 0; height: 2px;
-          background: linear-gradient(90deg, transparent, #FF2D8D, transparent);
+          background: linear-gradient(90deg, transparent, #F97316, transparent);
           animation: et-scan-move 5s ease-in-out infinite;
           opacity: 0.8;
         }
@@ -404,34 +404,34 @@ export default function ErayTechBlog() {
           90% { opacity: 0.9; }
         }
         .et-card { transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease; }
-        .et-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(0,0,0,0.18); border-color: #FF2D8D33; }
+        .et-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(0,0,0,0.18); border-color: #F9731633; }
         .et-thumb-wrap { overflow: hidden; }
         .et-thumb { transition: transform 0.6s ease; }
         .et-card:hover .et-thumb { transform: scale(1.08); }
         .et-btn-primary { background:#000000; color:#FFFFFF; transition: all 0.3s ease; }
-        .et-btn-primary:hover { background:#FF2D8D; box-shadow: 0 8px 22px -6px rgba(255,45,141,0.55); }
+        .et-btn-primary:hover { background:#F97316; box-shadow: 0 8px 22px -6px rgba(255,45,141,0.55); }
         .et-btn-secondary { background:#FFFFFF; color:#000000; border:1.5px solid #000000; transition: all 0.3s ease; }
-        .et-btn-secondary:hover { border-color:#FF2D8D; color:#FF2D8D; }
+        .et-btn-secondary:hover { border-color:#F97316; color:#F97316; }
         .et-pill { transition: all 0.25s ease; }
-        .et-pill:hover { border-color:#FF2D8D; color:#FF2D8D; }
+        .et-pill:hover { border-color:#F97316; color:#F97316; }
         .et-pill.active { background:#000000; color:#FFFFFF; border-color:#000000; }
         .et-link { position:relative; }
         .et-link::after {
-          content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:#FF2D8D;
+          content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:#F97316;
           transition: width 0.25s ease;
         }
         .et-link:hover::after { width:100%; }
         .et-fade-up { animation: et-fade-up 0.6s ease both; }
         @keyframes et-fade-up { from { opacity:0; transform: translateY(16px);} to {opacity:1; transform:translateY(0);} }
-        input:focus, button:focus, a:focus { outline: 2px solid #FF2D8D; outline-offset: 2px; }
+        input:focus, button:focus, a:focus { outline: 2px solid #F97316; outline-offset: 2px; }
       `}</style>
 
       {/* HERO */}
-      <section style={{ background: "#000000" }} className="relative overflow-hidden">
+      <section className="relative overflow-hidden bg-black">
         <div className="et-scan" />
         <div
           className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full blur-3xl opacity-20"
-          style={{ background: "radial-gradient(circle, #FF2D8D, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, #F97316, transparent 70%)" }}
         />
         <div
           className="absolute -bottom-24 -left-24 w-[320px] h-[320px] rounded-full blur-3xl opacity-10"
@@ -440,8 +440,8 @@ export default function ErayTechBlog() {
 
         <div className="max-w-7xl mx-auto px-6 md:px-10 pt-20 pb-28 relative">
           <div className="flex items-center gap-2 mb-6">
-            <span style={{ background: "#FF2D8D" }} className="w-2 h-2 rounded-full inline-block" />
-            <span className="text-[#FF2D8D] text-xs font-semibold tracking-[0.2em] uppercase">Le Mag Eray-Tech</span>
+            <span style={{ background: "#F97316" }} className="w-2 h-2 rounded-full inline-block" />
+            <span className="text-orange-500 text-xs font-semibold tracking-[0.2em] uppercase">Le Mag Eray-Tech</span>
           </div>
           <h1 className="display text-white font-extrabold text-4xl md:text-6xl leading-[1.05] max-w-3xl">
             Ce qui fait vibrer l'écran, expliqué simplement.
@@ -453,7 +453,7 @@ export default function ErayTechBlog() {
 
         {/* Featured card overlapping hero/white section */}
         <div className="max-w-7xl mx-auto px-6 md:px-10 relative">
-          <div className="et-card et-fade-up bg-white rounded-[24px] border border-[#E5E7EB] shadow-xl grid md:grid-cols-2 overflow-hidden translate-y-16 md:translate-y-20">
+          <div className="et-card et-fade-up bg-white rounded-[24px] border border-gray-200 shadow-xl grid md:grid-cols-2 overflow-hidden translate-y-16 md:translate-y-20">
             <div className="et-thumb-wrap relative h-56 md:h-auto" style={{ background: "#1F1F1F" }}>
               <div className="et-thumb absolute inset-0">
                 <Pattern type={featured.pattern} />
@@ -461,7 +461,7 @@ export default function ErayTechBlog() {
             </div>
             <div className="p-8 md:p-10 flex flex-col justify-center">
               <span
-                style={{ background: "#FFE3F0", color: "#FF2D8D" }}
+                style={{ background: "#FFEDD5", color: "#F97316" }}
                 className="inline-block w-fit text-xs font-semibold px-3 py-1 rounded-full mb-4"
               >
                 {featured.catLabel}
@@ -469,13 +469,13 @@ export default function ErayTechBlog() {
               <h2 className="display text-2xl md:text-[28px] font-bold leading-tight mb-3">
                 {featured.title}
               </h2>
-              <p className="text-[#6B7280] text-sm leading-relaxed mb-6">{featured.excerpt}</p>
+              <p className="text-gray-500 text-sm leading-relaxed mb-6">{featured.excerpt}</p>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div style={{ background: "#000000" }} className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-semibold bg-black">
                     {featured.author.split(" ")[1]?.[0] || featured.author[0]}
                   </div>
-                  <div className="text-xs text-[#6B7280]">
+                  <div className="text-xs text-gray-500">
                     <div className="font-medium text-[#1F1F1F]">{featured.author}</div>
                     <div className="flex items-center gap-1">
                       {featured.date} · <Clock size={11} className="inline" /> {featured.read}
@@ -513,7 +513,7 @@ export default function ErayTechBlog() {
                     setVisible(6);
                   }}
                   className={`et-pill flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl border ${
-                    isActive ? "active" : "border-[#E5E7EB] text-[#1F1F1F] bg-white"
+                    isActive ? "active" : "border-gray-200 text-[#1F1F1F] bg-white"
                   }`}
                 >
                   <Icon size={13} /> {c.label}
@@ -532,14 +532,14 @@ export default function ErayTechBlog() {
               role="button"
               tabIndex={0}
               onKeyDown={(e: KeyboardEvent<HTMLElement>) => e.key === "Enter" && openArticle(a.id)}
-              className="et-card bg-white rounded-[22px] border border-[#E5E7EB] shadow-sm overflow-hidden flex flex-col cursor-pointer"
+              className="et-card bg-white rounded-[22px] border border-gray-200 shadow-sm overflow-hidden flex flex-col cursor-pointer"
             >
               <div className="et-thumb-wrap relative h-44" style={{ background: "#1F1F1F" }}>
                 <div className="et-thumb absolute inset-0">
                   <Pattern type={a.pattern} />
                 </div>
                 <span
-                  style={{ background: "#FF2D8D" }}
+                  style={{ background: "#F97316" }}
                   className="absolute top-3 left-3 text-white text-[11px] font-semibold px-2.5 py-1 rounded-full"
                 >
                   {a.catLabel}
@@ -547,8 +547,8 @@ export default function ErayTechBlog() {
               </div>
               <div className="p-6 flex flex-col flex-1">
                 <h4 className="display font-bold text-base leading-snug mb-2">{a.title}</h4>
-                <p className="text-[#6B7280] text-sm leading-relaxed mb-5 flex-1">{a.excerpt}</p>
-                <div className="flex items-center justify-between text-xs text-[#6B7280] pt-4 border-t border-[#F5F5F5]">
+                <p className="text-gray-500 text-sm leading-relaxed mb-5 flex-1">{a.excerpt}</p>
+                <div className="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-neutral-100">
                   <span className="font-medium text-[#1F1F1F]">{a.author}</span>
                   <span className="flex items-center gap-1">
                     <Clock size={12} /> {a.read}
@@ -581,13 +581,13 @@ export default function ErayTechBlog() {
       </section>
 
       {/* NEWSLETTER */}
-      <section style={{ background: "#000000" }} className="relative overflow-hidden">
+      <section className="relative overflow-hidden bg-black">
         <div
           className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full blur-3xl opacity-20 -translate-y-1/2"
-          style={{ background: "radial-gradient(circle, #FF2D8D, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, #F97316, transparent 70%)" }}
         />
         <div className="max-w-4xl mx-auto px-6 md:px-10 py-20 text-center relative">
-          <div style={{ background: "#FF2D8D" }} className="w-11 h-11 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <div style={{ background: "#F97316" }} className="w-11 h-11 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <Mail size={19} color="#000000" strokeWidth={2.5} />
           </div>
           <h3 className="display text-white text-2xl md:text-3xl font-bold mb-3">
@@ -605,9 +605,9 @@ export default function ErayTechBlog() {
               type="email"
               required
               placeholder="votre@email.com"
-              className="flex-1 rounded-xl px-4 py-3 text-sm bg-white/10 text-white placeholder-white/40 border border-white/15 focus:border-[#FF2D8D]"
+              className="flex-1 rounded-xl px-4 py-3 text-sm bg-white/10 text-white placeholder-white/40 border border-white/15 focus:border-orange-500"
             />
-            <button className="et-btn-primary text-sm font-semibold px-6 py-3 rounded-xl" style={{ background: "#FF2D8D", color: "#000000" }}>
+            <button className="et-btn-primary text-sm font-semibold px-6 py-3 rounded-xl" style={{ background: "#F97316", color: "#000000" }}>
               S'inscrire
             </button>
           </form>
