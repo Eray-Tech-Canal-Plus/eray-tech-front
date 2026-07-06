@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CanalRouteImport } from './routes/canal'
 import { Route as BoutiqueRouteImport } from './routes/boutique'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactIndexRouteImport } from './routes/contact/index'
@@ -20,6 +21,11 @@ import { Route as ContactInstallationRouteImport } from './routes/contact/instal
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CanalRoute = CanalRouteImport.update({
+  id: '/canal',
+  path: '/canal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BoutiqueRoute = BoutiqueRouteImport.update({
@@ -56,6 +62,7 @@ const ContactInstallationRoute = ContactInstallationRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/boutique': typeof BoutiqueRoute
+  '/canal': typeof CanalRoute
   '/contact': typeof ContactRouteWithChildren
   '/contact/installation': typeof ContactInstallationRoute
   '/contact/telephone': typeof ContactTelephoneRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/boutique': typeof BoutiqueRoute
+  '/canal': typeof CanalRoute
   '/contact/installation': typeof ContactInstallationRoute
   '/contact/telephone': typeof ContactTelephoneRoute
   '/product/$id': typeof ProductIdRoute
@@ -74,6 +82,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/boutique': typeof BoutiqueRoute
+  '/canal': typeof CanalRoute
   '/contact': typeof ContactRouteWithChildren
   '/contact/installation': typeof ContactInstallationRoute
   '/contact/telephone': typeof ContactTelephoneRoute
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/boutique'
+    | '/canal'
     | '/contact'
     | '/contact/installation'
     | '/contact/telephone'
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/boutique'
+    | '/canal'
     | '/contact/installation'
     | '/contact/telephone'
     | '/product/$id'
@@ -102,6 +113,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/boutique'
+    | '/canal'
     | '/contact'
     | '/contact/installation'
     | '/contact/telephone'
@@ -112,6 +124,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BoutiqueRoute: typeof BoutiqueRoute
+  CanalRoute: typeof CanalRoute
   ContactRoute: typeof ContactRouteWithChildren
   ProductIdRoute: typeof ProductIdRoute
 }
@@ -123,6 +136,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/canal': {
+      id: '/canal'
+      path: '/canal'
+      fullPath: '/canal'
+      preLoaderRoute: typeof CanalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/boutique': {
@@ -188,6 +208,7 @@ const ContactRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BoutiqueRoute: BoutiqueRoute,
+  CanalRoute: CanalRoute,
   ContactRoute: ContactRouteWithChildren,
   ProductIdRoute: ProductIdRoute,
 }
