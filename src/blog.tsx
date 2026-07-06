@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { KeyboardEvent, MouseEvent, FormEvent } from "react";
 import {
   ArrowRight,
   Clock,
@@ -9,9 +10,32 @@ import {
   Sparkles,
   Mail,
   ChevronRight,
+  type LucideIcon,
 } from "lucide-react";
 
-const CATEGORIES = [
+type CategoryId = "all" | "series" | "tech" | "sport" | "musique";
+type PatternType = "waves" | "grid" | "dots" | "circles" | "lines";
+
+interface Category {
+  id: CategoryId;
+  label: string;
+  icon: LucideIcon;
+}
+
+interface Article {
+  id: number;
+  category: Exclude<CategoryId, "all">;
+  catLabel: string;
+  title: string;
+  excerpt: string;
+  author: string;
+  date: string;
+  read: string;
+  pattern: PatternType;
+  content: string[];
+}
+
+const CATEGORIES: Category[] = [
   { id: "all", label: "Tout", icon: Sparkles },
   { id: "series", label: "Séries & Films", icon: Tv },
   { id: "tech", label: "Technologie", icon: Zap },
@@ -19,7 +43,7 @@ const CATEGORIES = [
   { id: "musique", label: "Musique", icon: Music },
 ];
 
-const ARTICLES = [
+const ARTICLES: Article[] = [
   {
     id: 1,
     category: "tech",
@@ -153,7 +177,11 @@ const ARTICLES = [
   },
 ];
 
-function Pattern({ type }) {
+interface PatternProps {
+  type: PatternType;
+}
+
+function Pattern({ type }: PatternProps) {
   const common = { width: "100%", height: "100%" };
   if (type === "waves") {
     return (
@@ -204,13 +232,27 @@ function Pattern({ type }) {
   return (
     <svg viewBox="0 0 300 200" {...common} preserveAspectRatio="xMidYMid slice">
       {Array.from({ length: 12 }).map((_, i) => (
-        <rect key={i} x={i * 26} y={40 + Math.abs(Math.sin(i)) * 90} width="10" height={70 - Math.abs(Math.sin(i)) * 40} fill={i % 5 === 0 ? "#FF2D8D" : "#FFFFFF"} opacity={i % 5 === 0 ? 0.95 : 0.2} />
+        <rect
+          key={i}
+          x={i * 26}
+          y={40 + Math.abs(Math.sin(i)) * 90}
+          width="10"
+          height={70 - Math.abs(Math.sin(i)) * 40}
+          fill={i % 5 === 0 ? "#FF2D8D" : "#FFFFFF"}
+          opacity={i % 5 === 0 ? 0.95 : 0.2}
+        />
       ))}
     </svg>
   );
 }
 
-function ArticleDetail({ article, onBack, onOpen }) {
+interface ArticleDetailProps {
+  article: Article;
+  onBack: () => void;
+  onOpen: (id: number) => void;
+}
+
+function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
   const related = ARTICLES.filter((a) => a.category === article.category && a.id !== article.id).slice(0, 3);
 
   return (
@@ -292,7 +334,7 @@ function ArticleDetail({ article, onBack, onOpen }) {
                   onClick={() => onOpen(a.id)}
                   role="button"
                   tabIndex={0}
-                  onKeyDown={(e) => e.key === "Enter" && onOpen(a.id)}
+                  onKeyDown={(e: KeyboardEvent<HTMLElement>) => e.key === "Enter" && onOpen(a.id)}
                   className="et-card bg-white rounded-[20px] border border-[#E5E7EB] shadow-sm overflow-hidden flex flex-col cursor-pointer"
                 >
                   <div className="et-thumb-wrap relative h-32" style={{ background: "#1F1F1F" }}>
@@ -317,16 +359,15 @@ function ArticleDetail({ article, onBack, onOpen }) {
 }
 
 export default function ErayTechBlog() {
-  const [active, setActive] = useState("all");
-  const [visible, setVisible] = useState(6);
-  const [selectedId, setSelectedId] = useState(null);
+  const [active, setActive] = useState<CategoryId>("all");
+  const [visible, setVisible] = useState<number>(6);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const filtered = ARTICLES.filter((a) => active === "all" || a.category === active);
   const featured = ARTICLES[0];
-  const rest = filtered.filter((a) => a.id !== featured.id || active !== "all");
   const shown = (active === "all" ? filtered.slice(1) : filtered).slice(0, visible);
 
-  const openArticle = (id) => {
+  const openArticle = (id: number) => {
     setSelectedId(id);
     window.scrollTo?.({ top: 0, behavior: "smooth" });
   };
@@ -490,7 +531,7 @@ export default function ErayTechBlog() {
               onClick={() => openArticle(a.id)}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => e.key === "Enter" && openArticle(a.id)}
+              onKeyDown={(e: KeyboardEvent<HTMLElement>) => e.key === "Enter" && openArticle(a.id)}
               className="et-card bg-white rounded-[22px] border border-[#E5E7EB] shadow-sm overflow-hidden flex flex-col cursor-pointer"
             >
               <div className="et-thumb-wrap relative h-44" style={{ background: "#1F1F1F" }}>
@@ -514,7 +555,7 @@ export default function ErayTechBlog() {
                   </span>
                 </div>
                 <button
-                  onClick={(e) => {
+                  onClick={(e: MouseEvent<HTMLButtonElement>) => {
                     e.stopPropagation();
                     openArticle(a.id);
                   }}
@@ -555,7 +596,7 @@ export default function ErayTechBlog() {
           <p className="text-white/55 text-sm mb-8 max-w-md mx-auto">
             Recevez notre meilleure sélection chaque vendredi. Désabonnement en un clic, à tout moment.
           </p>
-          <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
+          <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e: FormEvent<HTMLFormElement>) => e.preventDefault()}>
             <label htmlFor="et-email" className="sr-only">
               Adresse e-mail
             </label>
