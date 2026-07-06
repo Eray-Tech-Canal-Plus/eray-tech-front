@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 
 type CategoryId = "all" | "series" | "tech" | "sport" | "musique";
-type PatternType = "waves" | "grid" | "dots" | "circles" | "lines";
 
 interface Category {
   id: CategoryId;
@@ -31,7 +30,8 @@ interface Article {
   author: string;
   date: string;
   read: string;
-  pattern: PatternType;
+  image: string;
+  imageAlt: string;
   content: string[];
 }
 
@@ -54,7 +54,8 @@ const ARTICLES: Article[] = [
     author: "L. Andriamora",
     date: "28 juin 2026",
     read: "5 min",
-    pattern: "waves",
+    image: "https://picsum.photos/seed/eraytech-decodeur/900/600",
+    imageAlt: "Décodeur nouvelle génération posé sous un téléviseur allumé",
     content: [
       "Trois ans après le précédent modèle, Eray-Tech dévoile un décodeur pensé pour disparaître dans le salon plutôt que pour l'occuper. Le boîtier perd 40 % de volume, adopte une finition mate et ne conserve qu'un seul port visible en façade.",
       "Sous le capot, le vrai changement est ailleurs : une puce dédiée traite désormais l'upscaling et le HDR en local, sans dépendre du débit internet disponible au moment de la diffusion. Concrètement, une scène sombre garde ses détails même sur une connexion chargée.",
@@ -72,7 +73,8 @@ const ARTICLES: Article[] = [
     author: "R. Rakoto",
     date: "26 juin 2026",
     read: "7 min",
-    pattern: "grid",
+    image: "https://picsum.photos/seed/eraytech-serie/900/600",
+    imageAlt: "Trois amis regardant une série ensemble installés sur un canapé",
     content: [
       "L'automne s'annonce chargé côté fiction. Notre rédaction a visionné les premiers épisodes de la rentrée pour établir cette sélection, entre nouveautés et retours attendus.",
       "Du côté des thrillers, une production tournée dans le nord de l'Europe mise sur des décors glacés et un rythme délibérément lent, à contre-courant des séries à cliffhangers permanents. Trois épisodes suffisent à comprendre pourquoi elle fait déjà parler d'elle.",
@@ -91,7 +93,8 @@ const ARTICLES: Article[] = [
     author: "H. Rasoanaivo",
     date: "24 juin 2026",
     read: "6 min",
-    pattern: "dots",
+    image: "https://picsum.photos/seed/eraytech-regie/900/600",
+    imageAlt: "Régie de retransmission avec plusieurs écrans de contrôle vidéo",
     content: [
       "16h30, quatre heures avant le coup d'envoi. Le camion régie est déjà branché, les douze caméras positionnées et testées une à une par l'équipe technique. Rien n'est laissé au hasard, chaque angle a été validé la veille sur plan.",
       "Dans le camion, huit personnes se partagent les écrans : un réalisateur pour choisir les plans en direct, un ingénieur son, deux techniciens dédiés au ralenti et à l'arbitrage vidéo, et une équipe graphisme qui incruste scores et statistiques en temps réel.",
@@ -110,7 +113,8 @@ const ARTICLES: Article[] = [
     author: "M. Randria",
     date: "21 juin 2026",
     read: "4 min",
-    pattern: "circles",
+    image: "https://picsum.photos/seed/eraytech-concert/900/600",
+    imageAlt: "Foule à un concert éclairée par des jeux de lumière de scène",
     content: [
       "L'audio spatial promet de placer l'auditeur au centre du mix plutôt que face à lui. Pour vérifier si la promesse tient sur autre chose qu'une démo constructeur, nous l'avons testé sur trois genres aux exigences très différentes.",
       "Sur un enregistrement de jazz live, l'effet convainc immédiatement : on distingue la position de chaque musicien sur scène, avec une profondeur qu'un mixage stéréo classique ne restitue pas.",
@@ -129,7 +133,8 @@ const ARTICLES: Article[] = [
     author: "L. Andriamora",
     date: "18 juin 2026",
     read: "5 min",
-    pattern: "lines",
+    image: "https://picsum.photos/seed/eraytech-connexion/900/600",
+    imageAlt: "Smartphone affichant une application de streaming à côté d'un routeur",
     content: [
       "Une lecture qui tremble gâche n'importe quel contenu, aussi bon soit-il. L'équipe technique d'Eray-Tech a travaillé deux ans sur un système de compression qui s'adapte en continu à la qualité réelle de la connexion, plutôt qu'à une estimation fixée au démarrage.",
       "Concrètement, l'application mesure la stabilité du réseau plusieurs fois par seconde et ajuste la qualité d'image par paliers imperceptibles, plutôt que par sauts brusques de résolution qui attirent l'œil.",
@@ -147,7 +152,8 @@ const ARTICLES: Article[] = [
     author: "R. Rakoto",
     date: "15 juin 2026",
     read: "8 min",
-    pattern: "grid",
+    image: "https://picsum.photos/seed/eraytech-scenariste/900/600",
+    imageAlt: "Bureau d'écrivain avec ordinateur portable et carnet de notes",
     content: [
       "Elle a accepté de nous recevoir dans la salle d'écriture, quelques semaines avant la diffusion du premier épisode. Trois ans de travail, une saison bouclée dans le plus grand secret : entretien sans détour sur la création d'une fiction ambitieuse.",
       "« La première version du scénario n'avait presque rien à voir avec ce qui sera diffusé », confie-t-elle. L'équipe d'écriture est repartie de zéro après six mois de travail, une décision rare et coûteuse qu'elle défend encore aujourd'hui.",
@@ -166,7 +172,8 @@ const ARTICLES: Article[] = [
     author: "H. Rasoanaivo",
     date: "12 juin 2026",
     read: "5 min",
-    pattern: "waves",
+    image: "https://picsum.photos/seed/eraytech-stade/900/600",
+    imageAlt: "Stade de football éclairé de nuit par les projecteurs",
     content: [
       "Vitesse de balle, probabilité de but, distance parcourue par chaque joueur : ces chiffres qui s'affichent en direct sur votre écran résultent d'une chaîne technique lancée bien avant le coup d'envoi.",
       "Une dizaine de caméras dédiées au tracking, distinctes des caméras de réalisation, suivent en continu la position du ballon et de chaque joueur sur le terrain, à raison de vingt-cinq mesures par seconde.",
@@ -176,75 +183,6 @@ const ARTICLES: Article[] = [
     ],
   },
 ];
-
-interface PatternProps {
-  type: PatternType;
-}
-
-function Pattern({ type }: PatternProps) {
-  const common = { width: "100%", height: "100%" };
-  if (type === "waves") {
-    return (
-      <svg viewBox="0 0 300 200" {...common} preserveAspectRatio="xMidYMid slice">
-        <path d="M0 120 Q 40 90 75 120 T 150 120 T 225 120 T 300 120" fill="none" stroke="#F97316" strokeWidth="3" opacity="0.9" />
-        <path d="M0 150 Q 40 120 75 150 T 150 150 T 225 150 T 300 150" fill="none" stroke="#FFFFFF" strokeWidth="2" opacity="0.35" />
-        <path d="M0 90 Q 40 60 75 90 T 150 90 T 225 90 T 300 90" fill="none" stroke="#FFFFFF" strokeWidth="2" opacity="0.2" />
-      </svg>
-    );
-  }
-  if (type === "grid") {
-    return (
-      <svg viewBox="0 0 300 200" {...common} preserveAspectRatio="xMidYMid slice">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <line key={"v" + i} x1={i * 50} y1="0" x2={i * 50} y2="200" stroke="#FFFFFF" strokeWidth="1" opacity="0.18" />
-        ))}
-        {Array.from({ length: 4 }).map((_, i) => (
-          <line key={"h" + i} x1="0" y1={i * 55} x2="300" y2={i * 55} stroke="#FFFFFF" strokeWidth="1" opacity="0.18" />
-        ))}
-        <circle cx="150" cy="100" r="34" fill="#F97316" opacity="0.9" />
-      </svg>
-    );
-  }
-  if (type === "dots") {
-    return (
-      <svg viewBox="0 0 300 200" {...common} preserveAspectRatio="xMidYMid slice">
-        {Array.from({ length: 7 }).map((_, r) =>
-          Array.from({ length: 10 }).map((_, c) => {
-            const cx = 15 + c * 30;
-            const cy = 15 + r * 28;
-            const hot = (r === 3 && (c === 4 || c === 5)) || (r === 2 && c === 4) || (r === 4 && c === 5);
-            return <circle key={r + "-" + c} cx={cx} cy={cy} r={hot ? 5 : 2.4} fill={hot ? "#F97316" : "#FFFFFF"} opacity={hot ? 0.95 : 0.22} />;
-          })
-        )}
-      </svg>
-    );
-  }
-  if (type === "circles") {
-    return (
-      <svg viewBox="0 0 300 200" {...common} preserveAspectRatio="xMidYMid slice">
-        <circle cx="150" cy="100" r="20" fill="none" stroke="#F97316" strokeWidth="3" />
-        <circle cx="150" cy="100" r="45" fill="none" stroke="#FFFFFF" strokeWidth="2" opacity="0.4" />
-        <circle cx="150" cy="100" r="70" fill="none" stroke="#FFFFFF" strokeWidth="2" opacity="0.22" />
-        <circle cx="150" cy="100" r="95" fill="none" stroke="#FFFFFF" strokeWidth="1.5" opacity="0.12" />
-      </svg>
-    );
-  }
-  return (
-    <svg viewBox="0 0 300 200" {...common} preserveAspectRatio="xMidYMid slice">
-      {Array.from({ length: 12 }).map((_, i) => (
-        <rect
-          key={i}
-          x={i * 26}
-          y={40 + Math.abs(Math.sin(i)) * 90}
-          width="10"
-          height={70 - Math.abs(Math.sin(i)) * 40}
-          fill={i % 5 === 0 ? "#F97316" : "#FFFFFF"}
-          opacity={i % 5 === 0 ? 0.95 : 0.2}
-        />
-      ))}
-    </svg>
-  );
-}
 
 interface ArticleDetailProps {
   article: Article;
@@ -298,7 +236,12 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
           className="et-fade-up rounded-[24px] overflow-hidden h-56 md:h-72 -translate-y-10 md:-translate-y-12 shadow-xl"
           style={{ background: "#1F1F1F" }}
         >
-          <Pattern type={article.pattern} />
+          <img
+            src={article.image}
+            alt={article.imageAlt}
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
         </div>
       </div>
 
@@ -339,7 +282,12 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
                 >
                   <div className="et-thumb-wrap relative h-32" style={{ background: "#1F1F1F" }}>
                     <div className="et-thumb absolute inset-0">
-                      <Pattern type={a.pattern} />
+                      <img
+                        src={a.image}
+                        alt={a.imageAlt}
+                        loading="lazy"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                   </div>
                   <div className="p-5">
@@ -456,7 +404,12 @@ export default function ErayTechBlog() {
           <div className="et-card et-fade-up bg-white rounded-[24px] border border-gray-200 shadow-xl grid md:grid-cols-2 overflow-hidden translate-y-16 md:translate-y-20">
             <div className="et-thumb-wrap relative h-56 md:h-auto" style={{ background: "#1F1F1F" }}>
               <div className="et-thumb absolute inset-0">
-                <Pattern type={featured.pattern} />
+                <img
+                  src={featured.image}
+                  alt={featured.imageAlt}
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
             <div className="p-8 md:p-10 flex flex-col justify-center">
@@ -536,7 +489,12 @@ export default function ErayTechBlog() {
             >
               <div className="et-thumb-wrap relative h-44" style={{ background: "#1F1F1F" }}>
                 <div className="et-thumb absolute inset-0">
-                  <Pattern type={a.pattern} />
+                  <img
+                    src={a.image}
+                    alt={a.imageAlt}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <span
                   style={{ background: "#F97316" }}
