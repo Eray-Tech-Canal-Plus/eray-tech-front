@@ -183,7 +183,7 @@ function Home() {
                   key={service.id}
                   onClick={() => go(i)}
                   className={`shrink-0 rounded-full px-4 py-1.5 text-xs font-semibold transition-colors ${
-                    i === index ? "bg-primary text-primary-foreground" : "bg-card text-muted-foreground"
+                    i === index ? `${service.btnClass} text-white` : "bg-card text-muted-foreground"
                   }`}
                 >
                   {service.short}
@@ -254,7 +254,7 @@ function HeroCarousel({
           <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
             {service.features.map(({ icon: Icon, label }) => (
               <li key={label} className="flex items-center gap-2 text-xs text-white/75 sm:text-sm">
-                <Icon className="h-4 w-4 text-primary" strokeWidth={1.75} />
+                <Icon className={`h-4 w-4 ${service.accentClass}`} strokeWidth={1.75} />
                 {label}
               </li>
             ))}
@@ -276,7 +276,13 @@ function HeroCarousel({
             aria-label={`Aller au service ${i + 1}`}
             onClick={() => onSelect(i)}
             className={`rounded-full transition-all ${
-              i === index ? "h-2.5 w-8 bg-primary" : "h-2.5 w-2.5 bg-white/50 hover:bg-white/80"
+              i === index
+                ? service.id === "canal"
+                  ? "h-2.5 w-8 bg-canal"
+                  : service.id === "phones"
+                  ? "h-2.5 w-8 bg-phones"
+                  : "h-2.5 w-8 bg-banking"
+                : "h-2.5 w-2.5 bg-white/50 hover:bg-white/80"
             }`}
           />
         ))}
@@ -296,6 +302,8 @@ function SideServiceCard({ service, onSelect }: { service: Service; onSelect: ()
         className={`absolute inset-0 ${
           service.id === "phones"
             ? "bg-gradient-to-br from-[oklch(0.35_0.15_260)]/90 via-black/70 to-black/90"
+            : service.id === "canal"
+            ? "bg-gradient-to-br from-[oklch(0.72_0.17_55)]/90 via-black/70 to-black/90"
             : "bg-gradient-to-br from-[oklch(0.35_0.12_145)]/90 via-black/70 to-black/90"
         }`}
       />
