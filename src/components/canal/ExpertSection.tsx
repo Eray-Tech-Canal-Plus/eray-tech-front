@@ -1,3 +1,5 @@
+import expertPortrait from "@/assets/expert-portrait.jpg";
+
 const stats = [
   { value: "+2 500", label: "installations réalisées" },
   { value: "48 h", label: "délai d'intervention" },
@@ -12,7 +14,7 @@ export function ExpertSection() {
         <div className="relative mx-auto w-full max-w-sm">
           <div className="absolute -inset-5 rounded-[2rem] bg-gradient-brand opacity-20 blur-2xl" />
           <img
-            src={"https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800"}
+            src={expertPortrait}
             alt="Julien Marchand, technicien installateur satellite"
             loading="lazy"
             width={1024}
@@ -23,31 +25,24 @@ export function ExpertSection() {
 
         <div>
           <h2 className="text-3xl sm:text-4xl">
-            Guillaume, votre{" "}
-            <span className="text-gradient-brand">installateur agréé</span>
+            Canal+, votre <span className="text-gradient-brand">partenaire pour une installation de qualité</span>
           </h2>
           <p className="mt-2 text-sm font-semibold uppercase tracking-widest text-primary">
-            Spécialiste antenne satellite & Canal+
+            Une installation professionnelle pour profiter pleinement de vos programmes
           </p>
 
           <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
             <p>
-              Technicien indépendant depuis plus de{" "}
-              <strong className="text-foreground">12 ans</strong>, je me suis
-              spécialisé dans la pose d'antennes paraboliques et la mise en
-              service des décodeurs Canal+.
+              Profitez d'une installation{" "}
+              <strong className="text-foreground">Canal+</strong>réalisée selon les meilleures pratiques afin de garantir une réception optimale de vos chaînes et services.
             </p>
             <p>
-              Chaque installation est réalisée dans les règles de l'art :
-              fixation sécurisée, câblage discret, orientation millimétrée du
-              satellite et test complet du signal avant de vous laisser la
-              télécommande.
+              Chaque intervention comprend l'installation et la configuration de votre équipement, l'orientation précise de l'antenne satellite si nécessaire, le raccordement des différents appareils ainsi que la vérification complète du signal et du bon fonctionnement de votre décodeur.
             </p>
             <p>
-              Mon objectif est simple :{" "}
+              Notre priorité est :{" "}
               <strong className="text-foreground">
-                que vous profitiez de toutes vos chaînes, sans coupure, dès le
-                jour de mon passage.
+                de vous offrir une expérience simple, fiable et immédiate, afin que vous puissiez accéder à l'ensemble de vos contenus Canal+ dès la fin de l'installation, avec une qualité d'image et de son optimale.
               </strong>
             </p>
           </div>
@@ -59,9 +54,7 @@ export function ExpertSection() {
                 className="rounded-xl border border-border bg-card p-4 text-center"
               >
                 <p className="font-display text-2xl text-primary">{s.value}</p>
-                <p className="mt-1 text-xs leading-tight text-muted-foreground">
-                  {s.label}
-                </p>
+                <p className="mt-1 text-xs leading-tight text-muted-foreground">{s.label}</p>
               </div>
             ))}
           </div>

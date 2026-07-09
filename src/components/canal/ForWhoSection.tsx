@@ -1,40 +1,41 @@
+import cardAntenne from "@/assets/card-antenne.jpg";
+import cardTv from "@/assets/card-tv.jpg";
+import cardClient from "@/assets/card-client.jpg";
+
 const cards = [
   {
     num: "1",
-    image: "https://images.unsplash.com/photo-1518623489648-a173ef7824f3?w=800",
+    image: cardAntenne,
     alt: "Pose d'antenne parabolique sur un toit",
     title: "Pose & orientation d'antenne",
     text: (
       <>
         Installation de votre <strong className="text-primary">antenne parabolique</strong> et
-        orientation précise vers le satellite pour capter toutes les chaînes en
-        haute qualité.
+        orientation précise vers le satellite pour capter toutes les chaînes en haute qualité.
       </>
     ),
   },
   {
     num: "2",
-    image: "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=800",
+    image: cardTv,
     alt: "Décodeur Canal+ raccordé à une télévision",
     title: "Décodeur & mise en service",
     text: (
       <>
         Raccordement et <strong className="text-primary">configuration complète</strong> de votre
-        décodeur : activation de l'abonnement, chaînes triées et télécommande
-        prête à l'emploi.
+        décodeur : activation de l'abonnement, chaînes triées et télécommande prête à l'emploi.
       </>
     ),
   },
   {
     num: "3",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800",
+    image: cardClient,
     alt: "Famille satisfaite regardant la télévision",
     title: "Réglage & garantie signal",
     text: (
       <>
         Test de qualité, réglage du <strong className="text-primary">signal optimal</strong> et
-        démonstration. On ne repart qu'une fois que tout fonctionne
-        parfaitement.
+        démonstration. On ne repart qu'une fois que tout fonctionne parfaitement.
       </>
     ),
   },
@@ -48,8 +49,7 @@ export function ForWhoSection() {
           Ce que nos <span className="text-gradient-brand">techniciens</span> font pour vous
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
-          Une prestation complète, de la fixation de l'antenne jusqu'à la
-          première chaîne diffusée.
+          Une prestation complète, de la fixation de l'antenne jusqu'à la première chaîne diffusée.
         </p>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -74,9 +74,7 @@ export function ForWhoSection() {
                   {card.num}
                 </span>
                 <h3 className="mt-4 text-xl">{card.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {card.text}
-                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{card.text}</p>
               </div>
             </article>
           ))}
