@@ -194,12 +194,12 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
   const related = ARTICLES.filter((a) => a.category === article.category && a.id !== article.id).slice(0, 3);
 
   return (
-    <div className="et-fade-up w-full" style={{ fontFamily: "'Inter', sans-serif", background: "#FFFFFF", color: "#1F1F1F" }}>
-      <div className="relative overflow-hidden bg-black">
+    <div className="et-fade-up w-full" style={{ fontFamily: "'Inter', sans-serif", background: "#FFFFFF", color: "#0D0D0D" }}>
+      <div className="relative overflow-hidden" style={{ background: "#0D0D0D" }}>
         <div className="et-scan" />
         <div
           className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full blur-3xl opacity-20"
-          style={{ background: "radial-gradient(circle, #F97316, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, #FF4500, transparent 70%)" }}
         />
         <div className="w-full px-6 md:px-10 pt-14 pb-16 relative">
           <button
@@ -209,7 +209,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
             <ArrowRight size={15} style={{ transform: "rotate(180deg)" }} /> Retour au Mag
           </button>
           <span
-            style={{ background: "#F97316" }}
+            style={{ background: "#FF4500" }}
             className="inline-block text-white text-xs font-semibold px-3 py-1 rounded-full mb-5"
           >
             {article.catLabel}
@@ -218,7 +218,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
             {article.title}
           </h1>
           <div className="flex items-center gap-3">
-            <div style={{ background: "#F97316" }} className="w-9 h-9 rounded-full flex items-center justify-center text-black text-xs font-bold">
+            <div style={{ background: "#FF4500" }} className="w-9 h-9 rounded-full flex items-center justify-center text-black text-xs font-bold">
               {article.author.split(" ")[1]?.[0] || article.author[0]}
             </div>
             <div className="text-xs text-white/55">
@@ -234,7 +234,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
       <div className="w-full px-6 md:px-10">
         <div
           className="et-fade-up rounded-[24px] overflow-hidden h-56 md:h-72 -translate-y-10 md:-translate-y-12 shadow-xl max-w-3xl mx-auto"
-          style={{ background: "#1F1F1F" }}
+          style={{ background: "#0D0D0D" }}
         >
           <img
             src={article.image}
@@ -246,16 +246,16 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
       </div>
 
       <article className="w-full px-6 md:px-10 pb-16 -mt-4 md:-mt-6 max-w-2xl mx-auto">
-        <p className="text-lg leading-relaxed text-[#1F1F1F] font-medium mb-6">{article.excerpt}</p>
+        <p className="text-lg leading-relaxed font-medium mb-6" style={{ color: "#0D0D0D" }}>{article.excerpt}</p>
         {article.content.map((p, i) => (
-          <p key={i} className="text-[#1F1F1F]/85 text-[15px] leading-[1.85] mb-5">
+          <p key={i} className="text-[15px] leading-[1.85] mb-5" style={{ color: "rgba(13,13,13,0.85)" }}>
             {p}
           </p>
         ))}
 
         <div className="flex items-center justify-between mt-10 pt-8 border-t border-gray-200">
           <span
-            style={{ background: "#FFEDD5", color: "#F97316" }}
+            style={{ background: "#FFE0D1", color: "#FF4500" }}
             className="text-xs font-semibold px-3 py-1.5 rounded-full"
           >
             {article.catLabel}
@@ -280,7 +280,7 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
                   onKeyDown={(e: KeyboardEvent<HTMLElement>) => e.key === "Enter" && onOpen(a.id)}
                   className="et-card bg-white rounded-[20px] border border-gray-200 shadow-sm overflow-hidden flex flex-col cursor-pointer"
                 >
-                  <div className="et-thumb-wrap relative h-32" style={{ background: "#1F1F1F" }}>
+                  <div className="et-thumb-wrap relative h-32" style={{ background: "#0D0D0D" }}>
                     <div className="et-thumb absolute inset-0">
                       <img
                         src={a.image}
@@ -335,13 +335,13 @@ export default function ErayTechBlog() {
   }
 
   return (
-    <div className="w-full" style={{ fontFamily: "'Inter', sans-serif", background: "#FFFFFF", color: "#1F1F1F" }}>
+    <div className="w-full" style={{ fontFamily: "'Inter', sans-serif", background: "#FFFFFF", color: "#0D0D0D" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
         .display { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
         .et-scan {
           position: absolute; left: 0; right: 0; height: 2px;
-          background: linear-gradient(90deg, transparent, #F97316, transparent);
+          background: linear-gradient(90deg, transparent, #FF4500, transparent);
           animation: et-scan-move 5s ease-in-out infinite;
           opacity: 0.8;
         }
@@ -352,34 +352,34 @@ export default function ErayTechBlog() {
           90% { opacity: 0.9; }
         }
         .et-card { transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease; }
-        .et-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(0,0,0,0.18); border-color: #F9731633; }
+        .et-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(0,0,0,0.18); border-color: #FF450033; }
         .et-thumb-wrap { overflow: hidden; }
         .et-thumb { transition: transform 0.6s ease; }
         .et-card:hover .et-thumb { transform: scale(1.08); }
-        .et-btn-primary { background:#000000; color:#FFFFFF; transition: all 0.3s ease; }
-        .et-btn-primary:hover { background:#F97316; box-shadow: 0 8px 22px -6px rgba(255,45,141,0.55); }
-        .et-btn-secondary { background:#FFFFFF; color:#000000; border:1.5px solid #000000; transition: all 0.3s ease; }
-        .et-btn-secondary:hover { border-color:#F97316; color:#F97316; }
+        .et-btn-primary { background:#0D0D0D; color:#FFFFFF; transition: all 0.3s ease; }
+        .et-btn-primary:hover { background:#FF4500; box-shadow: 0 8px 22px -6px rgba(255,69,0,0.55); }
+        .et-btn-secondary { background:#FFFFFF; color:#0D0D0D; border:1.5px solid #0D0D0D; transition: all 0.3s ease; }
+        .et-btn-secondary:hover { border-color:#FF4500; color:#FF4500; }
         .et-pill { transition: all 0.25s ease; }
-        .et-pill:hover { border-color:#F97316; color:#F97316; }
-        .et-pill.active { background:#000000; color:#FFFFFF; border-color:#000000; }
+        .et-pill:hover { border-color:#FF4500; color:#FF4500; }
+        .et-pill.active { background:#0D0D0D; color:#FFFFFF; border-color:#0D0D0D; }
         .et-link { position:relative; }
         .et-link::after {
-          content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:#F97316;
+          content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:#FF4500;
           transition: width 0.25s ease;
         }
         .et-link:hover::after { width:100%; }
         .et-fade-up { animation: et-fade-up 0.6s ease both; }
         @keyframes et-fade-up { from { opacity:0; transform: translateY(16px);} to {opacity:1; transform:translateY(0);} }
-        input:focus, button:focus, a:focus { outline: 2px solid #F97316; outline-offset: 2px; }
+        input:focus, button:focus, a:focus { outline: 2px solid #FF4500; outline-offset: 2px; }
       `}</style>
 
       {/* HERO */}
-      <section className="relative overflow-hidden bg-black">
+      <section className="relative overflow-hidden" style={{ background: "#0D0D0D" }}>
         <div className="et-scan" />
         <div
           className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full blur-3xl opacity-20"
-          style={{ background: "radial-gradient(circle, #F97316, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, #FF4500, transparent 70%)" }}
         />
         <div
           className="absolute -bottom-24 -left-24 w-[320px] h-[320px] rounded-full blur-3xl opacity-10"
@@ -388,8 +388,8 @@ export default function ErayTechBlog() {
 
         <div className="w-full px-6 md:px-10 pt-20 pb-24 relative">
           <div className="flex items-center gap-2 mb-6">
-            <span style={{ background: "#F97316" }} className="w-2 h-2 rounded-full inline-block" />
-            <span className="text-orange-500 text-xs font-semibold tracking-[0.2em] uppercase">Le Mag Eray-Tech</span>
+            <span style={{ background: "#FF4500" }} className="w-2 h-2 rounded-full inline-block" />
+            <span className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: "#FF4500" }}>Le Mag Eray-Tech</span>
           </div>
           <h1 className="display text-white font-extrabold text-4xl md:text-6xl leading-[1.05] max-w-3xl">
             Ce qui fait vibrer l'écran, expliqué simplement.
@@ -405,7 +405,7 @@ export default function ErayTechBlog() {
           to sit just over the hero/white seam. */}
       <div className="w-full px-6 md:px-10 relative z-10 -mt-10 md:-mt-12">
         <div className="et-card et-fade-up bg-white rounded-[24px] border border-gray-200 shadow-xl grid md:grid-cols-2 overflow-hidden">
-          <div className="et-thumb-wrap relative h-56 md:h-auto" style={{ background: "#1F1F1F" }}>
+          <div className="et-thumb-wrap relative h-56 md:h-auto" style={{ background: "#0D0D0D" }}>
             <div className="et-thumb absolute inset-0">
               <img
                 src={featured.image}
@@ -417,7 +417,7 @@ export default function ErayTechBlog() {
           </div>
           <div className="p-8 md:p-10 flex flex-col justify-center">
             <span
-              style={{ background: "#FFEDD5", color: "#F97316" }}
+              style={{ background: "#FFE0D1", color: "#FF4500" }}
               className="inline-block w-fit text-xs font-semibold px-3 py-1 rounded-full mb-4"
             >
               {featured.catLabel}
@@ -428,11 +428,11 @@ export default function ErayTechBlog() {
             <p className="text-gray-500 text-sm leading-relaxed mb-6">{featured.excerpt}</p>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-semibold bg-black">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-semibold" style={{ background: "#0D0D0D" }}>
                   {featured.author.split(" ")[1]?.[0] || featured.author[0]}
                 </div>
                 <div className="text-xs text-gray-500">
-                  <div className="font-medium text-[#1F1F1F]">{featured.author}</div>
+                  <div className="font-medium" style={{ color: "#0D0D0D" }}>{featured.author}</div>
                   <div className="flex items-center gap-1">
                     {featured.date} · <Clock size={11} className="inline" /> {featured.read}
                   </div>
@@ -440,7 +440,8 @@ export default function ErayTechBlog() {
               </div>
               <button
                 onClick={() => openArticle(featured.id)}
-                className="et-link text-sm font-semibold text-black flex items-center gap-1"
+                className="et-link text-sm font-semibold flex items-center gap-1"
+                style={{ color: "#0D0D0D" }}
               >
                 Lire <ArrowRight size={15} />
               </button>
@@ -468,8 +469,9 @@ export default function ErayTechBlog() {
                     setVisible(6);
                   }}
                   className={`et-pill flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl border ${
-                    isActive ? "active" : "border-gray-200 text-[#1F1F1F] bg-white"
+                    isActive ? "active" : "border-gray-200 bg-white"
                   }`}
+                  style={!isActive ? { color: "#0D0D0D" } : undefined}
                 >
                   <Icon size={13} /> {c.label}
                 </button>
@@ -489,7 +491,7 @@ export default function ErayTechBlog() {
               onKeyDown={(e: KeyboardEvent<HTMLElement>) => e.key === "Enter" && openArticle(a.id)}
               className="et-card bg-white rounded-[22px] border border-gray-200 shadow-sm overflow-hidden flex flex-col cursor-pointer"
             >
-              <div className="et-thumb-wrap relative h-44" style={{ background: "#1F1F1F" }}>
+              <div className="et-thumb-wrap relative h-44" style={{ background: "#0D0D0D" }}>
                 <div className="et-thumb absolute inset-0">
                   <img
                     src={a.image}
@@ -499,7 +501,7 @@ export default function ErayTechBlog() {
                   />
                 </div>
                 <span
-                  style={{ background: "#F97316" }}
+                  style={{ background: "#FF4500" }}
                   className="absolute top-3 left-3 text-white text-[11px] font-semibold px-2.5 py-1 rounded-full"
                 >
                   {a.catLabel}
@@ -509,7 +511,7 @@ export default function ErayTechBlog() {
                 <h4 className="display font-bold text-base leading-snug mb-2">{a.title}</h4>
                 <p className="text-gray-500 text-sm leading-relaxed mb-5 flex-1">{a.excerpt}</p>
                 <div className="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-neutral-100">
-                  <span className="font-medium text-[#1F1F1F]">{a.author}</span>
+                  <span className="font-medium" style={{ color: "#0D0D0D" }}>{a.author}</span>
                   <span className="flex items-center gap-1">
                     <Clock size={12} /> {a.read}
                   </span>
@@ -519,7 +521,8 @@ export default function ErayTechBlog() {
                     e.stopPropagation();
                     openArticle(a.id);
                   }}
-                  className="et-link text-xs font-semibold text-black flex items-center gap-1 mt-3 self-start"
+                  className="et-link text-xs font-semibold flex items-center gap-1 mt-3 self-start"
+                  style={{ color: "#0D0D0D" }}
                 >
                   Lire l'article <ArrowRight size={13} />
                 </button>
@@ -541,14 +544,14 @@ export default function ErayTechBlog() {
       </section>
 
       {/* NEWSLETTER */}
-      <section className="relative overflow-hidden bg-black">
+      <section className="relative overflow-hidden" style={{ background: "#0D0D0D" }}>
         <div
           className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full blur-3xl opacity-20 -translate-y-1/2"
-          style={{ background: "radial-gradient(circle, #F97316, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, #FF4500, transparent 70%)" }}
         />
         <div className="w-full px-6 md:px-10 py-20 text-center relative">
-          <div style={{ background: "#F97316" }} className="w-11 h-11 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <Mail size={19} color="#000000" strokeWidth={2.5} />
+          <div style={{ background: "#FF4500" }} className="w-11 h-11 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <Mail size={19} color="#0D0D0D" strokeWidth={2.5} />
           </div>
           <h3 className="display text-white text-2xl md:text-3xl font-bold mb-3">
             Un article par semaine, aucune publicité.
@@ -565,9 +568,12 @@ export default function ErayTechBlog() {
               type="email"
               required
               placeholder="votre@email.com"
-              className="flex-1 rounded-xl px-4 py-3 text-sm bg-white/10 text-white placeholder-white/40 border border-white/15 focus:border-orange-500"
+              className="flex-1 rounded-xl px-4 py-3 text-sm bg-white/10 text-white placeholder-white/40 border border-white/15"
+              style={{ borderColor: "rgba(255,255,255,0.15)" }}
+              onFocus={(e) => (e.currentTarget.style.borderColor = "#FF4500")}
+              onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)")}
             />
-            <button className="et-btn-primary text-sm font-semibold px-6 py-3 rounded-xl" style={{ background: "#F97316", color: "#000000" }}>
+            <button className="et-btn-primary text-sm font-semibold px-6 py-3 rounded-xl" style={{ background: "#FF4500", color: "#0D0D0D" }}>
               S'inscrire
             </button>
           </form>
