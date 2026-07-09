@@ -149,7 +149,7 @@ export default function BookingPage() {
       <div className="min-h-screen bg-background flex items-center justify-center px-4 py-12">
         <Toaster richColors position="top-center" />
         <div className="max-w-lg w-full text-center bg-card border border-border rounded-2xl p-10 shadow-xl">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-pink/10 text-pink mb-6">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full text-white mb-6" style={{ background: 'linear-gradient(135deg, #FF6A33, #FF4500, #E03D00)' }}>
             <CheckCircle2 className="h-9 w-9" />
           </div>
           <h1 className="text-3xl font-bold tracking-tight">Réservation confirmée</h1>
@@ -163,7 +163,8 @@ export default function BookingPage() {
             Un email de confirmation vous a été envoyé.
           </p>
           <Button
-            className="mt-8 bg-pink text-pink-foreground hover:bg-pink/90"
+            className="mt-8 text-white border-0 hover:opacity-90 transition-opacity"
+            style={{ background: 'linear-gradient(135deg, #FF6A33, #FF4500, #E03D00)' }}
             onClick={() => {
               setConfirmed(false);
               setDate(undefined);
@@ -190,7 +191,7 @@ export default function BookingPage() {
             </div>
             <span className="font-semibold tracking-tight">CANAL+ Installation</span>
           </div>
-          <Badge className="bg-pink/10 text-pink hover:bg-pink/15 border-0">
+          <Badge className="text-white border-0 hover:opacity-90" style={{ background: 'linear-gradient(135deg, #FF6A33, #FF4500)' }}>
             <Sparkles className="h-3 w-3 mr-1" /> Offres en cours
           </Badge>
         </div>
@@ -199,7 +200,7 @@ export default function BookingPage() {
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-4 sm:px-6 pt-10 pb-6">
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-          Réservez votre <span className="text-pink">installation</span> à domicile
+          Réservez votre <span style={{ color: '#FF4500' }}>installation</span> à domicile
         </h1>
         <p className="mt-3 text-muted-foreground max-w-2xl">
           Un technicien Canal+ certifié se déplace chez vous. Choisissez la date, le créneau et
@@ -231,7 +232,7 @@ export default function BookingPage() {
                       <div className="flex items-center gap-2 flex-wrap">
                         <p className="font-semibold">{s.name}</p>
                         {s.promo && (
-                          <Badge className="bg-pink text-pink-foreground border-0 hover:bg-pink">
+                          <Badge className="text-white border-0" style={{ background: 'linear-gradient(135deg, #FF6A33, #FF4500)' }}>
                             {s.promo.label}
                           </Badge>
                         )}
@@ -328,9 +329,10 @@ export default function BookingPage() {
                                   "rounded-lg border px-3 py-2 text-sm transition-all text-left",
                                   "disabled:opacity-40 disabled:cursor-not-allowed",
                                   active
-                                    ? "border-pink bg-pink text-pink-foreground"
+                                    ? "border-transparent text-white"
                                     : "border-border hover:border-foreground/40 hover:bg-muted",
                                 )}
+                                style={active ? { background: 'linear-gradient(135deg, #FF6A33, #FF4500, #E03D00)' } : undefined}
                               >
                                 <span className="flex items-center gap-2">
                                   <Clock className="h-3.5 w-3.5" />
@@ -415,7 +417,8 @@ export default function BookingPage() {
               </div>
               <Button
                 onClick={handleSubmit}
-                className="w-full h-12 text-base bg-pink text-pink-foreground hover:bg-pink/90 shadow-lg shadow-pink/20"
+                className="w-full h-12 text-base text-white border-0 hover:opacity-90 transition-opacity shadow-lg"
+                style={{ background: 'linear-gradient(135deg, #FF6A33, #FF4500, #E03D00)', boxShadow: '0 10px 30px -8px rgba(255, 69, 0, 0.4)' }}
               >
                 Confirmer la réservation
               </Button>
