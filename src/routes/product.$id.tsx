@@ -71,53 +71,9 @@ function ProductPageInner() {
 
   return (
     <div style={{ backgroundColor: COLORS_CUSTOM.deep, color: COLORS_CUSTOM.white, minHeight: "100vh" }}>
-      {/* Top bar */}
-      <div style={{ backgroundColor: COLORS_CUSTOM.deep, borderBottom: `1px solid rgba(255,255,255,0.08)` }}>
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2.5 text-xs">
-          <span style={{ color: COLORS_CUSTOM.white }}>Appelez-nous : +33 1 23 45 67 89</span>
-          <span className="hidden md:block" style={{ color: COLORS_CUSTOM.white }}>
-            Inscrivez-vous et obtenez <span style={{ color: COLORS_CUSTOM.orange, fontWeight: 600 }}>20% de réduction</span>.{" "}
-            <button onClick={() => toast.success("Inscription ouverte !")} className="underline" style={{ color: COLORS_CUSTOM.orange }}>Inscription</button>
-          </span>
-          <div className="flex items-center gap-3" style={{ color: COLORS_CUSTOM.white }}>
-            <Facebook className="h-3.5 w-3.5" /><Twitter className="h-3.5 w-3.5" /><Instagram className="h-3.5 w-3.5" />
-          </div>
-        </div>
-      </div>
 
-      {/* Header */}
-      <header className="sticky top-0 z-30 border-b" style={{ backgroundColor: COLORS_CUSTOM.deep, borderColor: `rgba(255,255,255,0.08)` }}>
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full font-bold" style={{ backgroundColor: COLORS_CUSTOM.orange, color: COLORS_CUSTOM.white }}>P</div>
-            <span className="text-xl font-semibold tracking-tight" style={{ color: COLORS_CUSTOM.white }}>PhoneLux<span style={{ color: COLORS_CUSTOM.orange }}>.</span></span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium" style={{ color: COLORS_CUSTOM.white }}>
-            <Link to="/" className="hover:opacity-70 transition">Accueil</Link>
-            <Link to="/" style={{ color: COLORS_CUSTOM.orange }}>Boutique</Link>
-            <Link to="/" className="hover:opacity-70 transition">Smartphones</Link>
-            <Link to="/" className="hover:opacity-70 transition">Accessoires</Link>
-          </nav>
-          <div className="flex items-center gap-4" style={{ color: COLORS_CUSTOM.white }}>
-            <Search className="h-5 w-5 cursor-pointer hover:opacity-70 transition" onClick={() => navigate({ to: "/" })} />
-            <Heart className="h-5 w-5 cursor-pointer hover:opacity-70 transition" onClick={() => toast("Favoris")} />
-            <ShoppingBag className="h-5 w-5 cursor-pointer hover:opacity-70 transition" onClick={() => toast("Panier")} />
-            <User className="h-5 w-5 cursor-pointer hover:opacity-70 transition" onClick={() => toast("Compte")} />
-          </div>
-        </div>
-      </header>
 
-      {/* Breadcrumb */}
-      <section style={{ backgroundColor: `rgba(255,255,255,0.03)` }}>
-        <div className="mx-auto max-w-7xl px-6 py-14 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight" style={{ color: COLORS_CUSTOM.white }}>Boutique</h1>
-          <p className="mt-3 text-sm" style={{ color: `rgba(255,255,255,0.6)` }}>
-            <Link to="/" style={{ color: `rgba(255,255,255,0.6)` }}>Accueil</Link> <span className="mx-2" style={{ color: COLORS_CUSTOM.orange }}>/</span>
-            <Link to="/" style={{ color: `rgba(255,255,255,0.6)` }}>Boutique</Link> <span className="mx-2" style={{ color: COLORS_CUSTOM.orange }}>/</span>
-            Détail produit
-          </p>
-        </div>
-      </section>
+
 
       {/* Product */}
       <div className="mx-auto max-w-6xl px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-10">
