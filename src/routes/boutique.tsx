@@ -130,35 +130,6 @@ function ShopInner() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: COLORS_CUSTOM.deep, color: COLORS_CUSTOM.white }}>
-      {/* Top bar */}
-      <div style={{ backgroundColor: COLORS_CUSTOM.deep, borderBottom: `1px solid rgba(255,255,255,0.08)` }}>
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2.5 text-xs">
-          <span style={{ color: COLORS_CUSTOM.white }}>Appelez-nous : +33 1 23 45 67 89</span>
-          <span className="hidden md:block" style={{ color: COLORS_CUSTOM.white }}>
-            Inscrivez-vous et obtenez <span style={{ color: COLORS_CUSTOM.orange, fontWeight: 600 }}>20% de réduction</span> sur votre première commande.{" "}
-            <button 
-              onClick={() => toast.success("Inscription ouverte !")} 
-              style={{ color: COLORS_CUSTOM.orange }}
-              className="underline underline-offset-2"
-            >
-              Inscription
-            </button>
-          </span>
-          <div className="flex items-center gap-3" style={{ color: COLORS_CUSTOM.white }}>
-            {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
-              <button 
-                key={i} 
-                onClick={() => toast("Réseaux sociaux à venir")} 
-                className="hover:opacity-70 transition"
-                style={{ color: COLORS_CUSTOM.white }}
-              >
-                <Icon className="h-3.5 w-3.5" />
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Header */}
       <header 
         className="border-b sticky top-0 z-30"
@@ -179,30 +150,6 @@ function ShopInner() {
               PhoneLux<span style={{ color: COLORS_CUSTOM.orange }}>.</span>
             </span>
           </Link>
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <Link to="/" style={{ color: COLORS_CUSTOM.orange }}>Boutique</Link>
-            <button 
-              onClick={() => setSelCats(["Smartphones"])} 
-              className="transition hover:opacity-70"
-              style={{ color: COLORS_CUSTOM.white }}
-            >
-              Smartphones
-            </button>
-            <button 
-              onClick={() => setSelCats(["Accessoires"])} 
-              className="transition hover:opacity-70"
-              style={{ color: COLORS_CUSTOM.white }}
-            >
-              Accessoires
-            </button>
-            <button 
-              onClick={() => toast("Page à venir")} 
-              className="transition hover:opacity-70"
-              style={{ color: COLORS_CUSTOM.white }}
-            >
-              À propos
-            </button>
-          </nav>
           <div className="flex items-center gap-3">
             <div className="relative hidden sm:block">
               <Search className="h-4 w-4 absolute left-3 top-1/2 -translate-y-1/2" style={{ color: COLORS_CUSTOM.white }} />
