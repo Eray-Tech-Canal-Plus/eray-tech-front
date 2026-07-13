@@ -17,6 +17,8 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactIndexRouteImport } from './routes/contact/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
+import { Route as ContactTelephoneRouteImport } from './routes/contact/telephone'
+import { Route as ContactInstallationRouteImport } from './routes/contact/installation'
 
 const ReservationRoute = ReservationRouteImport.update({
   id: '/reservation',
@@ -58,6 +60,16 @@ const ProductIdRoute = ProductIdRouteImport.update({
   path: '/product/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactTelephoneRoute = ContactTelephoneRouteImport.update({
+  id: '/telephone',
+  path: '/telephone',
+  getParentRoute: () => ContactRoute,
+} as any)
+const ContactInstallationRoute = ContactInstallationRouteImport.update({
+  id: '/installation',
+  path: '/installation',
+  getParentRoute: () => ContactRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -66,6 +78,8 @@ export interface FileRoutesByFullPath {
   '/canal': typeof CanalRoute
   '/contact': typeof ContactRouteWithChildren
   '/reservation': typeof ReservationRoute
+  '/contact/installation': typeof ContactInstallationRoute
+  '/contact/telephone': typeof ContactTelephoneRoute
   '/product/$id': typeof ProductIdRoute
   '/contact/': typeof ContactIndexRoute
 }
@@ -75,6 +89,8 @@ export interface FileRoutesByTo {
   '/boutique': typeof BoutiqueRoute
   '/canal': typeof CanalRoute
   '/reservation': typeof ReservationRoute
+  '/contact/installation': typeof ContactInstallationRoute
+  '/contact/telephone': typeof ContactTelephoneRoute
   '/product/$id': typeof ProductIdRoute
   '/contact': typeof ContactIndexRoute
 }
@@ -86,6 +102,8 @@ export interface FileRoutesById {
   '/canal': typeof CanalRoute
   '/contact': typeof ContactRouteWithChildren
   '/reservation': typeof ReservationRoute
+  '/contact/installation': typeof ContactInstallationRoute
+  '/contact/telephone': typeof ContactTelephoneRoute
   '/product/$id': typeof ProductIdRoute
   '/contact/': typeof ContactIndexRoute
 }
@@ -98,6 +116,8 @@ export interface FileRouteTypes {
     | '/canal'
     | '/contact'
     | '/reservation'
+    | '/contact/installation'
+    | '/contact/telephone'
     | '/product/$id'
     | '/contact/'
   fileRoutesByTo: FileRoutesByTo
@@ -107,6 +127,8 @@ export interface FileRouteTypes {
     | '/boutique'
     | '/canal'
     | '/reservation'
+    | '/contact/installation'
+    | '/contact/telephone'
     | '/product/$id'
     | '/contact'
   id:
@@ -117,6 +139,8 @@ export interface FileRouteTypes {
     | '/canal'
     | '/contact'
     | '/reservation'
+    | '/contact/installation'
+    | '/contact/telephone'
     | '/product/$id'
     | '/contact/'
   fileRoutesById: FileRoutesById
@@ -189,14 +213,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact/telephone': {
+      id: '/contact/telephone'
+      path: '/telephone'
+      fullPath: '/contact/telephone'
+      preLoaderRoute: typeof ContactTelephoneRouteImport
+      parentRoute: typeof ContactRoute
+    }
+    '/contact/installation': {
+      id: '/contact/installation'
+      path: '/installation'
+      fullPath: '/contact/installation'
+      preLoaderRoute: typeof ContactInstallationRouteImport
+      parentRoute: typeof ContactRoute
+    }
   }
 }
 
 interface ContactRouteChildren {
+  ContactInstallationRoute: typeof ContactInstallationRoute
+  ContactTelephoneRoute: typeof ContactTelephoneRoute
   ContactIndexRoute: typeof ContactIndexRoute
 }
 
 const ContactRouteChildren: ContactRouteChildren = {
+  ContactInstallationRoute: ContactInstallationRoute,
+  ContactTelephoneRoute: ContactTelephoneRoute,
   ContactIndexRoute: ContactIndexRoute,
 }
 
