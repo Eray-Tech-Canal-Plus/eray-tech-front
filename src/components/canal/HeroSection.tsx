@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
+import heroTechnicien from "@/assets/hero-technicien.jpg";
+
 export function HeroSection() {
   const [nom, setNom] = useState("");
   const [tel, setTel] = useState("");
@@ -26,16 +28,15 @@ export function HeroSection() {
           </span>
 
           <h1 className="mt-5 text-4xl leading-[1.05] sm:text-5xl md:text-6xl">
-            Installation{" "}
-            <span className="text-gradient-brand">Canal+</span>
+            Installation <span className="text-gradient-brand">Canal+</span>
             <br /> chez vous
           </h1>
 
           <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Pose d'antenne parabolique, réglage satellite et mise en service de
-            votre décodeur. Nos techniciens vous garantissent un{" "}
-            <span className="font-semibold text-foreground">signal parfait</span>{" "}
-            et toutes vos chaînes en HD dès aujourd'hui.
+            Pose d'antenne parabolique, réglage satellite et mise en service de votre décodeur. Nos
+            techniciens vous garantissent un{" "}
+            <span className="font-semibold text-foreground">signal parfait</span> et toutes vos
+            chaînes en HD dès aujourd'hui.
           </p>
 
           <form
@@ -72,7 +73,7 @@ export function HeroSection() {
         <div className="relative mx-auto w-full max-w-md">
           <div className="absolute -inset-6 rounded-[2rem] bg-gradient-brand opacity-20 blur-2xl" />
           <img
-            src={"https://images.unsplash.com/photo-1521790361543-f645cf042ec4?w=1600"}
+            src={heroTechnicien}
             alt="Technicien installateur Canal+ avec antenne satellite"
             width={1024}
             height={1152}

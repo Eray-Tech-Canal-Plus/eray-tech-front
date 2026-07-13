@@ -23,8 +23,8 @@ export function FinalCta() {
             <br /> et branchez Canal+
           </h2>
           <p className="mt-4 max-w-md text-primary-foreground/90">
-            Réservez votre créneau dès maintenant. Devis gratuit, intervention
-            rapide et satisfaction garantie.
+            Réservez votre créneau dès maintenant. Devis gratuit, intervention rapide et
+            satisfaction garantie.
           </p>
         </div>
 
@@ -55,9 +55,7 @@ export function FinalCta() {
 
       <div className="border-t border-primary-foreground/20">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-6 text-center text-sm text-primary-foreground/80 sm:flex-row sm:text-left">
-          <p className="font-display text-lg tracking-wide">
-            INSTALLATION CANAL+
-          </p>
+          <p className="font-display text-lg tracking-wide">INSTALLATION CANAL+</p>
           <p>Intervention 7j/7 • Antenne · Décodeur · Réglage signal</p>
         </div>
       </div>
