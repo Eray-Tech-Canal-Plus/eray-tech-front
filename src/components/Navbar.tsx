@@ -3,10 +3,9 @@ import { MessageCircle, Phone } from "lucide-react";
 
 const NAV_ITEMS = [
   { label: "Accueil", to: "/" as const },
-  { label: "Services", to: "/" as const, hash: "services" as const },
   { label: "Boutique", to: "/boutique" as const },
   { label: "Blog", to: "/blog" as const },
-  { label: "Canal+", to: "/canal" as const },
+  { label: "Services", to: "/canal" as const },
   { label: "Contact", to: "/contact" as const },
 ];
 
