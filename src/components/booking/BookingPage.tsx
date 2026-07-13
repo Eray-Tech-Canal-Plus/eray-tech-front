@@ -182,21 +182,6 @@ export default function BookingPage() {
     <div className="min-h-screen bg-background text-foreground">
       <Toaster richColors position="top-center" />
 
-      {/* Header */}
-      <header className="border-b border-border bg-background/80 backdrop-blur sticky top-0 z-40">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-md bg-foreground text-background grid place-items-center font-black">
-              C+
-            </div>
-            <span className="font-semibold tracking-tight">CANAL+ Installation</span>
-          </div>
-          <Badge className="text-white border-0 hover:opacity-90" style={{ background: 'linear-gradient(135deg, #FF6A33, #FF4500)' }}>
-            <Sparkles className="h-3 w-3 mr-1" /> Offres en cours
-          </Badge>
-        </div>
-      </header>
-
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-4 sm:px-6 pt-10 pb-6">
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">

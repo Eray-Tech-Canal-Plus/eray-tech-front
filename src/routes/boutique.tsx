@@ -2,10 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import {
-  Search,
   Heart,
-  ShoppingBag,
-  User,
   Facebook,
   Twitter,
   Instagram,
@@ -130,66 +127,6 @@ function ShopInner() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: COLORS_CUSTOM.deep, color: COLORS_CUSTOM.white }}>
-      {/* Header */}
-      <header 
-        className="border-b sticky top-0 z-30"
-        style={{ 
-          backgroundColor: COLORS_CUSTOM.deep, 
-          borderColor: `rgba(255,255,255,0.08)` 
-        }}
-      >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 gap-6">
-          <Link to="/" className="flex items-center gap-2 shrink-0">
-            <div 
-              className="flex h-9 w-9 items-center justify-center rounded-full font-bold text-sm"
-              style={{ backgroundColor: COLORS_CUSTOM.orange, color: COLORS_CUSTOM.white }}
-            >
-              P
-            </div>
-            <span className="text-xl font-semibold tracking-tight" style={{ color: COLORS_CUSTOM.white }}>
-              PhoneLux<span style={{ color: COLORS_CUSTOM.orange }}>.</span>
-            </span>
-          </Link>
-          <div className="flex items-center gap-3">
-            <div className="relative hidden sm:block">
-              <Search className="h-4 w-4 absolute left-3 top-1/2 -translate-y-1/2" style={{ color: COLORS_CUSTOM.white }} />
-              <input
-                value={search}
-                onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-                placeholder="Rechercher..."
-                className="pl-9 pr-3 py-2 h-9 rounded-md border text-sm w-48 focus:outline-none focus:ring-2"
-                style={{ 
-                  backgroundColor: `rgba(255,255,255,0.05)`,
-                  borderColor: `rgba(255,255,255,0.15)`,
-                  color: COLORS_CUSTOM.white,
-                  focusRingColor: COLORS_CUSTOM.orange,
-                }}
-              />
-            </div>
-            <button 
-              onClick={() => toast("Favoris mis à jour")} 
-              className="hover:opacity-70 transition"
-              style={{ color: COLORS_CUSTOM.white }}
-            >
-              <Heart className="h-5 w-5" />
-            </button>
-            <button 
-              onClick={() => toast("Panier ouvert")} 
-              className="hover:opacity-70 transition"
-              style={{ color: COLORS_CUSTOM.white }}
-            >
-              <ShoppingBag className="h-5 w-5" />
-            </button>
-            <button 
-              onClick={() => toast("Connexion à venir")} 
-              className="hover:opacity-70 transition"
-              style={{ color: COLORS_CUSTOM.white }}
-            >
-              <User className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
-      </header>
 
       {/* Page title */}
       <section style={{ backgroundColor: `rgba(255,255,255,0.03)` }}>
