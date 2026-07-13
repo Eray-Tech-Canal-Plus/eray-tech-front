@@ -14,7 +14,7 @@ const choices = [
     accentClass: "text-canal",
     tagClass: "bg-canal/20 text-canal border-canal/30",
     btnClass: "bg-gradient-to-r from-[oklch(0.72_0.17_55)] to-[oklch(0.62_0.17_50)] hover:brightness-110",
-    image: "/images/hero-canal.png",
+    image: "/images/hero-canal.jpg",
   },
   {
     to: "/contact/telephone" as const,
@@ -24,7 +24,7 @@ const choices = [
     accentClass: "text-phones",
     tagClass: "bg-phones/20 text-phones border-phones/30",
     btnClass: "bg-phones hover:brightness-110",
-    image: "/images/service-phones.png",
+    image: "/images/service-phones.jpg",
   },
 ];
 
