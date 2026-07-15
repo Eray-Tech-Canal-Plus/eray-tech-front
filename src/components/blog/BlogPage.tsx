@@ -33,6 +33,7 @@ interface Article {
   image: string;
   imageAlt: string;
   content: string[];
+  gallery: { src: string; alt: string }[];
 }
 
 const CATEGORIES: Category[] = [
@@ -62,6 +63,12 @@ const ARTICLES: Article[] = [
       "Le démarrage, souvent pointé du doigt sur l'ancienne génération, passe de onze secondes à moins de deux. La télécommande, elle, gagne un micro pour la recherche vocale et perd six boutons devenus inutiles avec la nouvelle interface.",
       "Le déploiement commence par les abonnés en renouvellement de contrat avant d'être ouvert à l'ensemble du catalogue d'ici la fin de l'année.",
     ],
+    gallery: [
+      { src: "https://picsum.photos/seed/decodeur-1/600/400", alt: "Vue de face du décodeur nouvelle génération" },
+      { src: "https://picsum.photos/seed/decodeur-2/600/400", alt: "Détail des ports arrière du décodeur" },
+      { src: "https://picsum.photos/seed/decodeur-3/600/400", alt: "Télécommande avec micro intégré" },
+      { src: "https://picsum.photos/seed/decodeur-4/600/400", alt: "Le décodeur installé sous un téléviseur" },
+    ],
   },
   {
     id: 2,
@@ -81,6 +88,12 @@ const ARTICLES: Article[] = [
       "Les amateurs de comédie ne sont pas oubliés : une nouvelle série choisit le format court, vingt-deux minutes par épisode, pour raconter une histoire de reconversion professionnelle sans jamais forcer le trait.",
       "Enfin, la saison très attendue d'une fiction culte revient avec un budget revu à la hausse et une distribution élargie. Sans trop en dévoiler, la première scène pose déjà les enjeux de l'ensemble de la saison.",
       "Le calendrier complet, épisode par épisode, est disponible dans l'application, section « À venir ».",
+    ],
+    gallery: [
+      { src: "https://picsum.photos/seed/serie-1/600/400", alt: "Scène de thriller nordique dans un décor enneigé" },
+      { src: "https://picsum.photos/seed/serie-2/600/400", alt: "Deux acteurs sur le plateau de tournage" },
+      { src: "https://picsum.photos/seed/serie-3/600/400", alt: "Affiche promotionnelle de la série événement" },
+      { src: "https://picsum.photos/seed/serie-4/600/400", alt: "L'équipe technique en coulisses" },
     ],
   },
   {
@@ -102,6 +115,12 @@ const ARTICLES: Article[] = [
       "À la moindre coupure de signal, une bascule automatique vers un flux de secours prend le relais en moins de 200 millisecondes, invisible pour la plupart des téléspectateurs.",
       "Le match se termine, l'équipe range son matériel : la prochaine retransmission est prévue dans quarante-huit heures, à l'autre bout du pays.",
     ],
+    gallery: [
+      { src: "https://picsum.photos/seed/regie-1/600/400", alt: "Vue intérieure de la camion régie mobile" },
+      { src: "https://picsum.photos/seed/regie-2/600/400", alt: "Écrans de contrôle vidéo en direct" },
+      { src: "https://picsum.photos/seed/regie-3/600/400", alt: "Caméra de retransmission sportive" },
+      { src: "https://picsum.photos/seed/regie-4/600/400", alt: "L'équipe technique pendant le match" },
+    ],
   },
   {
     id: 4,
@@ -122,6 +141,12 @@ const ARTICLES: Article[] = [
       "Le pop mainstream, enfin, montre les limites de l'exercice : la plupart des titres n'ont pas été pensés pour ce format, et la conversion automatique produit un rendu correct mais rarement mémorable.",
       "Conclusion provisoire : l'audio spatial change vraiment l'expérience d'écoute, mais seulement quand le mixage d'origine a été pensé pour lui — la technologie ne fait pas tout.",
     ],
+    gallery: [
+      { src: "https://picsum.photos/seed/concert-1/600/400", alt: "Scène de concert avec éclairage LED" },
+      { src: "https://picsum.photos/seed/concert-2/600/400", alt: "Casque audio haute fidélité posé sur une console" },
+      { src: "https://picsum.photos/seed/concert-3/600/400", alt: "Studio d'enregistrement avec micros professionnels" },
+      { src: "https://picsum.photos/seed/concert-4/600/400", alt: "Foule lors d'un festival de musique" },
+    ],
   },
   {
     id: 5,
@@ -140,6 +165,12 @@ const ARTICLES: Article[] = [
       "Concrètement, l'application mesure la stabilité du réseau plusieurs fois par seconde et ajuste la qualité d'image par paliers imperceptibles, plutôt que par sauts brusques de résolution qui attirent l'œil.",
       "Un préchargement discret entre également en jeu : les premières secondes de l'épisode suivant sont mises en mémoire pendant le visionnage du précédent, ce qui explique la quasi-absence de temps de chargement entre deux épisodes.",
       "Ces ajustements restent invisibles par design — l'objectif affiché par l'équipe n'est pas de vous montrer la technologie, mais de vous la faire oublier.",
+    ],
+    gallery: [
+      { src: "https://picsum.photos/seed/connexion-1/600/400", alt: "Application de streaming sur écran de smartphone" },
+      { src: "https://picsum.photos/seed/connexion-2/600/400", alt: "Routeur Wi-Fi avec indicateur de signal" },
+      { src: "https://picsum.photos/seed/connexion-3/600/400", alt: "Graphique de qualité de flux vidéo" },
+      { src: "https://picsum.photos/seed/connexion-4/600/400", alt: "Comparaison avant/après compression intelligente" },
     ],
   },
   {
@@ -161,6 +192,12 @@ const ARTICLES: Article[] = [
       "La scénariste revient aussi sur la difficulté de clore une histoire pensée pour durer plusieurs saisons sans trahir les spectateurs les plus fidèles, un exercice qu'elle compare à « démonter un mécanisme d'horlogerie pièce par pièce, sans casser le mouvement ».",
       "La série sera disponible en intégralité dès sa sortie, un choix assumé par la production pour permettre un visionnage au rythme de chacun.",
     ],
+    gallery: [
+      { src: "https://picsum.photos/seed/scenariste-1/600/400", alt: "Bureau d'écriture avec scripts et notes" },
+      { src: "https://picsum.photos/seed/scenariste-2/600/400", alt: "Plan de travail avec feuillets de scénario" },
+      { src: "https://picsum.photos/seed/scenariste-3/600/400", alt: "Clap de tournage en studio" },
+      { src: "https://picsum.photos/seed/scenariste-4/600/400", alt: "Écran d'édition de script numérisé" },
+    ],
   },
   {
     id: 7,
@@ -180,6 +217,12 @@ const ARTICLES: Article[] = [
       "Ces données brutes transitent par un serveur qui calcule les statistiques dérivées — vitesse, distance, probabilité — en moins d'une seconde, avant d'être transmises à l'équipe graphisme qui les habille pour l'antenne.",
       "L'ensemble de la chaîne, de la mesure à l'affichage, prend environ trois secondes. Un délai jugé imperceptible par la production, mais que l'équipe technique cherche encore à réduire.",
       "Ces mêmes données alimentent aussi les résumés automatiques disponibles quelques minutes après la fin de la rencontre dans l'application.",
+    ],
+    gallery: [
+      { src: "https://picsum.photos/seed/stade-1/600/400", alt: "Caméras de tracking positionnées autour du terrain" },
+      { src: "https://picsum.photos/seed/stade-2/600/400", alt: "Écran affichant les statistiques en temps réel" },
+      { src: "https://picsum.photos/seed/stade-3/600/400", alt: "Vue aérienne du stade éclairé" },
+      { src: "https://picsum.photos/seed/stade-4/600/400", alt: "Équipe technique analysant les données" },
     ],
   },
 ];
@@ -231,40 +274,65 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
         </div>
       </div>
 
-      <div className="w-full px-6 md:px-10">
-        <div
-          className="et-fade-up rounded-[24px] overflow-hidden h-56 md:h-72 -translate-y-10 md:-translate-y-12 shadow-xl max-w-3xl mx-auto"
-          style={{ background: "#0D0D0D" }}
-        >
-          <img
-            src={article.image}
-            alt={article.imageAlt}
-            loading="lazy"
-            className="w-full h-full object-cover"
-          />
+      <div className="w-full px-6 md:px-10 py-12 md:py-16">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
+          <div className="flex flex-col gap-5">
+            <div
+              className="et-fade-up rounded-[20px] overflow-hidden aspect-[4/3] bg-neutral-100 shadow-lg"
+              style={{ background: "#0D0D0D" }}
+            >
+              <img
+                src={article.image}
+                alt={article.imageAlt}
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {article.gallery.length > 0 && (
+              <div className="grid grid-cols-2 gap-3">
+                {article.gallery.map((img, i) => (
+                  <div
+                    key={i}
+                    className="et-fade-up rounded-xl overflow-hidden aspect-[3/2] bg-neutral-100"
+                    style={{ animationDelay: `${i * 80}ms` }}
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <article className="flex flex-col justify-center">
+            <p className="text-xl leading-relaxed font-semibold mb-6" style={{ color: "#0D0D0D" }}>{article.excerpt}</p>
+            <div className="space-y-5">
+              {article.content.map((p, i) => (
+                <p key={i} className="text-[15px] leading-[1.9] text-neutral-600">
+                  {p}
+                </p>
+              ))}
+            </div>
+
+            <div className="flex items-center justify-between mt-10 pt-8 border-t border-gray-200">
+              <span
+                style={{ background: "#FFE0D1", color: "#FF4500" }}
+                className="text-xs font-semibold px-3 py-1.5 rounded-full"
+              >
+                {article.catLabel}
+              </span>
+              <button onClick={onBack} className="et-btn-secondary text-sm font-semibold px-5 py-2.5 rounded-xl">
+                Retour aux articles
+              </button>
+            </div>
+          </article>
         </div>
       </div>
-
-      <article className="w-full px-6 md:px-10 pb-16 -mt-4 md:-mt-6 max-w-2xl mx-auto">
-        <p className="text-lg leading-relaxed font-medium mb-6" style={{ color: "#0D0D0D" }}>{article.excerpt}</p>
-        {article.content.map((p, i) => (
-          <p key={i} className="text-[15px] leading-[1.85] mb-5" style={{ color: "rgba(13,13,13,0.85)" }}>
-            {p}
-          </p>
-        ))}
-
-        <div className="flex items-center justify-between mt-10 pt-8 border-t border-gray-200">
-          <span
-            style={{ background: "#FFE0D1", color: "#FF4500" }}
-            className="text-xs font-semibold px-3 py-1.5 rounded-full"
-          >
-            {article.catLabel}
-          </span>
-          <button onClick={onBack} className="et-btn-secondary text-sm font-semibold px-5 py-2.5 rounded-xl">
-            Retour aux articles
-          </button>
-        </div>
-      </article>
 
       {related.length > 0 && (
         <section className="py-16 bg-neutral-100">
