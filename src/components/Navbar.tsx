@@ -7,7 +7,7 @@ const NAV_ITEMS = [
   { label: "Blog", to: "/blog" as const },
   { label: "Services", to: "/canal" as const },
   { label: "Contact", to: "/contact" as const },
-];
+] as const;
 
 export default function Navbar() {
   return (
@@ -26,9 +26,8 @@ export default function Navbar() {
             <Link
               key={item.label}
               to={item.to}
-              {...(item.hash ? { hash: item.hash } : {})}
               activeProps={{ className: "text-primary" }}
-              activeOptions={{ exact: item.to === "/", includeHash: !!item.hash }}
+              activeOptions={{ exact: item.to === "/" }}
               className="transition-colors hover:text-primary"
             >
               {item.label}

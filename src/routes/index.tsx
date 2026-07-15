@@ -906,38 +906,6 @@ function Home() {
             </div>
           </div>
         </section>
-
-        <footer className="border-t border-border/40 bg-background px-6 py-8 text-center text-xs text-muted-foreground lg:px-10">
-          <div className="mx-auto max-w-[1400px]">
-            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
-              <img
-                  src="/images/logo-area.svg"
-                  alt="NEXT TECH & SERVICES"
-                  className="h-8 w-auto object-contain"
-              />
-              <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
-                <a href="#" className="transition-colors hover:text-primary">
-                  Accueil
-                </a>
-                <a href="#services" className="transition-colors hover:text-primary">
-                  Services
-                </a>
-                <a href="#process" className="transition-colors hover:text-primary">
-                  Guide
-                </a>
-                <a href="#offers" className="transition-colors hover:text-primary">
-                  Offres
-                </a>
-                <a href="/contact" className="transition-colors hover:text-primary">
-                  Contact
-                </a>
-              </nav>
-            </div>
-            <p className="mt-6">
-              © {new Date().getFullYear()} NEXT TECH &amp; SERVICES. Tous droits réservés.
-            </p>
-          </div>
-        </footer>
       </div>
   );
 }

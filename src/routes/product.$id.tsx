@@ -307,12 +307,6 @@ function ProductPageInner() {
         </div>
       </section>
 
-      <footer className="text-sm" style={{ backgroundColor: `rgba(255,255,255,0.03)` }}>
-        <div className="mx-auto max-w-7xl px-6 py-8 flex items-center justify-between">
-          <p style={{ color: `rgba(255,255,255,0.6)` }}>© 2026 PhoneLux. Tous droits réservés.</p>
-        </div>
-      </footer>
-
       {checkoutOpen && (
         <LinkMobileCheckout
           product={product}

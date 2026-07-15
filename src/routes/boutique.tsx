@@ -360,18 +360,6 @@ function ShopInner() {
           ))}
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="text-sm" style={{ backgroundColor: `rgba(255,255,255,0.03)` }}>
-        <div className="mx-auto max-w-7xl px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p style={{ color: `rgba(255,255,255,0.6)` }}>© 2026 PhoneLux. Tous droits réservés.</p>
-          <div className="flex gap-6">
-            <button onClick={() => toast("Mentions légales")} className="hover:opacity-70 transition" style={{ color: COLORS_CUSTOM.white }}>Mentions légales</button>
-            <button onClick={() => toast("Confidentialité")} className="hover:opacity-70 transition" style={{ color: COLORS_CUSTOM.white }}>Confidentialité</button>
-            <button onClick={() => toast("Contact : contact@phonelux.fr")} className="hover:opacity-70 transition" style={{ color: COLORS_CUSTOM.white }}>Contact</button>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
