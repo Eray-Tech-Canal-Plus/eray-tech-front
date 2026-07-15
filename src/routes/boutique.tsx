@@ -126,7 +126,7 @@ function ShopInner() {
   const textDeep = { color: COLORS_CUSTOM.deep };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: COLORS_CUSTOM.deep, color: COLORS_CUSTOM.white }}>
+    <div style={{ backgroundColor: COLORS_CUSTOM.deep, color: COLORS_CUSTOM.white }}>
 
       {/* Page title */}
       <section style={{ backgroundColor: `rgba(255,255,255,0.03)` }}>
