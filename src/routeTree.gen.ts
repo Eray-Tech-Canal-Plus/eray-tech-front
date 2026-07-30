@@ -10,10 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ReservationRouteImport } from './routes/reservation'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CanalRouteImport } from './routes/canal'
 import { Route as BoutiqueRouteImport } from './routes/boutique'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactIndexRouteImport } from './routes/contact/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
@@ -23,6 +25,11 @@ import { Route as ContactInstallationRouteImport } from './routes/contact/instal
 const ReservationRoute = ReservationRouteImport.update({
   id: '/reservation',
   path: '/reservation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -43,6 +50,11 @@ const BoutiqueRoute = BoutiqueRouteImport.update({
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -73,10 +85,12 @@ const ContactInstallationRoute = ContactInstallationRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/blog': typeof BlogRoute
   '/boutique': typeof BoutiqueRoute
   '/canal': typeof CanalRoute
   '/contact': typeof ContactRouteWithChildren
+  '/login': typeof LoginRoute
   '/reservation': typeof ReservationRoute
   '/contact/installation': typeof ContactInstallationRoute
   '/contact/telephone': typeof ContactTelephoneRoute
@@ -85,9 +99,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/blog': typeof BlogRoute
   '/boutique': typeof BoutiqueRoute
   '/canal': typeof CanalRoute
+  '/login': typeof LoginRoute
   '/reservation': typeof ReservationRoute
   '/contact/installation': typeof ContactInstallationRoute
   '/contact/telephone': typeof ContactTelephoneRoute
@@ -97,10 +113,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/blog': typeof BlogRoute
   '/boutique': typeof BoutiqueRoute
   '/canal': typeof CanalRoute
   '/contact': typeof ContactRouteWithChildren
+  '/login': typeof LoginRoute
   '/reservation': typeof ReservationRoute
   '/contact/installation': typeof ContactInstallationRoute
   '/contact/telephone': typeof ContactTelephoneRoute
@@ -111,10 +129,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/blog'
     | '/boutique'
     | '/canal'
     | '/contact'
+    | '/login'
     | '/reservation'
     | '/contact/installation'
     | '/contact/telephone'
@@ -123,9 +143,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/blog'
     | '/boutique'
     | '/canal'
+    | '/login'
     | '/reservation'
     | '/contact/installation'
     | '/contact/telephone'
@@ -134,10 +156,12 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/blog'
     | '/boutique'
     | '/canal'
     | '/contact'
+    | '/login'
     | '/reservation'
     | '/contact/installation'
     | '/contact/telephone'
@@ -147,10 +171,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   BlogRoute: typeof BlogRoute
   BoutiqueRoute: typeof BoutiqueRoute
   CanalRoute: typeof CanalRoute
   ContactRoute: typeof ContactRouteWithChildren
+  LoginRoute: typeof LoginRoute
   ReservationRoute: typeof ReservationRoute
   ProductIdRoute: typeof ProductIdRoute
 }
@@ -162,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/reservation'
       fullPath: '/reservation'
       preLoaderRoute: typeof ReservationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -190,6 +223,13 @@ declare module '@tanstack/react-router' {
       path: '/blog'
       fullPath: '/blog'
       preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -247,10 +287,12 @@ const ContactRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   BlogRoute: BlogRoute,
   BoutiqueRoute: BoutiqueRoute,
   CanalRoute: CanalRoute,
   ContactRoute: ContactRouteWithChildren,
+  LoginRoute: LoginRoute,
   ReservationRoute: ReservationRoute,
   ProductIdRoute: ProductIdRoute,
 }
