@@ -14,7 +14,7 @@ export const Route = createFileRoute("/contact/installation")({
 type InstallationForm = {
   nom: string;
   prenom: string;
-  numero: string;
+  telephone: string;
   adresse: string;
   email: string;
 };
@@ -22,7 +22,7 @@ type InstallationForm = {
 const initialForm: InstallationForm = {
   nom: "",
   prenom: "",
-  numero: "",
+  telephone: "",
   adresse: "",
   email: "",
 };
@@ -79,12 +79,12 @@ function ContactInstallation() {
               </Field>
             </div>
 
-            <Field label="Numéro" id="numero" required>
+            <Field label="Téléphone" id="telephone" required>
               <Input
-                id="numero"
+                id="telephone"
                 type="tel"
-                value={form.numero}
-                onChange={update("numero")}
+                value={form.telephone}
+                onChange={update("telephone")}
                 placeholder="+221 XX XXX XX XX"
                 required
               />
