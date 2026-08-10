@@ -67,7 +67,11 @@ function ShopThemed() {
   );
 }
 
+import { api, type PhoneApiData } from "@/services/api";
+import { useEffect } from "react";
+
 function ShopInner() {
+  const [productList, setProductList] = useState<Product[]>(products);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [selCats, setSelCats] = useState<string[]>([]);
@@ -80,8 +84,55 @@ function ShopInner() {
   const [priceMax, setPriceMax] = useState(PRICE_MAX);
   const [sort, setSort] = useState("default");
 
+  useEffect(() => {
+    let isMounted = true;
+    api.getPhones()
+      .then((data) => {
+        if (!isMounted || !Array.isArray(data) || data.length === 0) return;
+        const mapped: Product[] = data.map((p) => {
+          const numPrice = typeof p.prix === "number" ? p.prix : parseFloat(p.prix as string) || 0;
+          const storageStr = typeof p.stockage === "number" ? `${p.stockage} Go` : String(p.stockage);
+          const brandName = p.marque?.nom || "Marque";
+          const catName = p.categorie?.nom || "Smartphones";
+          return {
+            id: p.id,
+            name: p.name,
+            brand: brandName,
+            category: catName,
+            price: numPrice,
+            oldPrice: Math.round(numPrice * 1.15),
+            discount: 15,
+            rating: 4.8,
+            reviews: 12,
+            image: p.image || "https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?w=600",
+            gallery: [p.image || "https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?w=600"],
+            colors: [p.couleur || "Noir"],
+            storages: [storageStr],
+            inStock: p.disponibilite !== "Rupture de stock",
+            sku: `PL-${brandName.slice(0, 3).toUpperCase()}-${p.id.toString().padStart(4, "0")}`,
+            description: `${p.name} - État: ${p.etat}. Téléphone disponible chez Eray Tech.`,
+            specs: [
+              { label: "Marque", value: brandName },
+              { label: "Catégorie", value: catName },
+              { label: "Stockage", value: storageStr },
+              { label: "Couleur", value: p.couleur },
+              { label: "État", value: p.etat },
+            ],
+          };
+        });
+        setProductList(mapped);
+      })
+      .catch((err) => {
+        console.warn("Using fallback local products:", err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const filtered = useMemo(() => {
-    let list = products.filter((p) => {
+    let list = productList.filter((p) => {
       if (search && !`${p.name} ${p.brand}`.toLowerCase().includes(search.toLowerCase())) return false;
       if (selCats.length && !selCats.includes(p.category)) return false;
       if (selBrands.length && !selBrands.includes(p.brand)) return false;
@@ -97,7 +148,7 @@ function ShopInner() {
     if (sort === "desc") list = [...list].sort((a, b) => b.price - a.price);
     if (sort === "new") list = [...list].sort((a, b) => b.id - a.id);
     return list;
-  }, [search, selCats, selBrands, selStorages, selColors, selRatings, priceMax, inStockOnly, outOfStock, sort]);
+  }, [productList, search, selCats, selBrands, selStorages, selColors, selRatings, priceMax, inStockOnly, outOfStock, sort]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const currentPage = Math.min(page, totalPages);
@@ -258,7 +309,6 @@ function ShopInner() {
                   backgroundColor: `rgba(255,255,255,0.05)`,
                   borderColor: `rgba(255,255,255,0.15)`,
                   color: COLORS_CUSTOM.white,
-                  focusRingColor: COLORS_CUSTOM.orange,
                 }}
               >
                 <option value="default" style={{ backgroundColor: COLORS_CUSTOM.deep, color: COLORS_CUSTOM.white }}>Tri par défaut</option>

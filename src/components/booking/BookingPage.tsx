@@ -104,6 +104,8 @@ function isSlotTaken(date: Date | undefined, slotId: string) {
   return map[seed]?.includes(slotId) ?? false;
 }
 
+import { api } from "@/services/api";
+
 export default function BookingPage() {
   const [serviceId, setServiceId] = useState<string>(SERVICES[1].id);
   const [date, setDate] = useState<Date | undefined>();
@@ -115,6 +117,7 @@ export default function BookingPage() {
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [confirmed, setConfirmed] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const service = useMemo(
     () => SERVICES.find((s) => s.id === serviceId) ?? SERVICES[0],
@@ -127,21 +130,63 @@ export default function BookingPage() {
     if (!fullName.trim()) e.fullName = "Nom complet requis";
     if (!address.trim()) e.address = "Adresse requise";
     if (!city.trim()) e.city = "Ville requise";
-    if (!/^\d{3}$/.test(postal)) e.postal = "Code postal invalide";
-    if (!/^(?:\+?\d{9,13})$/.test(phone.replace(/\s/g, ""))) e.phone = "Téléphone invalide";
+    if (!postal.trim()) e.postal = "Code postal requis";
+    if (!phone.trim()) e.phone = "Téléphone invalide";
     if (!date) e.date = "Sélectionnez une date";
     if (!slot) e.slot = "Sélectionnez un créneau";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validate()) {
       toast.error("Veuillez corriger les champs manquants");
       return;
     }
-    setConfirmed(true);
-    toast.success("Réservation confirmée !");
+    setLoading(true);
+    try {
+      // 1. Fetch available services from backend or fallback to service ID 1
+      let dbServiceId = 1;
+      try {
+        const dbServices = await api.getServices();
+        if (dbServices && dbServices.length > 0) {
+          const matched = dbServices.find(s => s.nom.toLowerCase().includes(service.name.toLowerCase()));
+          if (matched) dbServiceId = matched.id;
+          else dbServiceId = dbServices[0].id;
+        }
+      } catch (e) {
+        console.warn("Could not fetch DB services, defaulting to ID 1", e);
+      }
+
+      // 2. Create client in backend
+      const emailGenerated = `${fullName.toLowerCase().replace(/\s+/g, ".")}@example.com`;
+      const clientRes = await api.createClient({
+        nom: fullName,
+        email: emailGenerated,
+        telephone: phone,
+        adresse: address,
+        code_post: postal,
+        ville: city,
+      });
+
+      const clientId = clientRes.data?.id || 1;
+
+      // 3. Create reservation in backend
+      const formattedDate = date ? format(date, "yyyy-MM-dd") : format(new Date(), "yyyy-MM-dd");
+      await api.createReservation({
+        id_service: dbServiceId,
+        id_client: clientId,
+        date: formattedDate,
+        statut: "en_attente",
+      });
+
+      setConfirmed(true);
+      toast.success("Réservation enregistrée dans le système !");
+    } catch (err: any) {
+      toast.error(err.message || "Erreur lors de la réservation");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (confirmed) {
@@ -402,10 +447,11 @@ export default function BookingPage() {
               </div>
               <Button
                 onClick={handleSubmit}
+                disabled={loading}
                 className="w-full h-12 text-base text-white border-0 hover:opacity-90 transition-opacity shadow-lg"
-                style={{ background: 'linear-gradient(135deg, #FF6A33, #FF4500, #E03D00)', boxShadow: '0 10px 30px -8px rgba(255, 69, 0, 0.4)' }}
+                style={{ background: 'linear-gradient(135deg, #FF6A33, #FF4500, #E03D00)' }}
               >
-                Confirmer la réservation
+                {loading ? "Validation en cours..." : "Confirmer la réservation"}
               </Button>
               <p className="text-[11px] text-center text-muted-foreground">
                 Aucune carte requise — paiement le jour de l'installation.

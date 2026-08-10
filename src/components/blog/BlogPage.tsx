@@ -374,13 +374,55 @@ function ArticleDetail({ article, onBack, onOpen }: ArticleDetailProps) {
   );
 }
 
+import { api, type BlogApiData } from "@/services/api";
+import { useEffect } from "react";
+
 export default function ErayTechBlog() {
+  const [articlesList, setArticlesList] = useState<Article[]>(ARTICLES);
   const [active, setActive] = useState<CategoryId>("all");
   const [visible, setVisible] = useState<number>(6);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  const filtered = ARTICLES.filter((a) => active === "all" || a.category === active);
-  const featured = ARTICLES[0];
+  useEffect(() => {
+    let isMounted = true;
+    api.getBlogs()
+      .then((data) => {
+        if (!isMounted || !Array.isArray(data) || data.length === 0) return;
+        const mapped: Article[] = data.map((b) => {
+          const typeLower = (b.type || "").toLowerCase();
+          let cat: Exclude<CategoryId, "all"> = "tech";
+          if (typeLower.includes("serie") || typeLower.includes("film")) cat = "series";
+          else if (typeLower.includes("sport")) cat = "sport";
+          else if (typeLower.includes("music") || typeLower.includes("musique")) cat = "musique";
+
+          return {
+            id: b.id,
+            category: cat,
+            catLabel: b.type || "Technologie",
+            title: b.titre,
+            excerpt: b.contenu.slice(0, 140) + "...",
+            author: b.auteur || "Eray Tech",
+            date: b.date_publication || "2026",
+            read: "5 min",
+            image: b.image || "https://picsum.photos/seed/eraytech/900/600",
+            imageAlt: b.titre,
+            content: [b.contenu],
+            gallery: b.image ? [{ src: b.image, alt: b.titre }] : [],
+          };
+        });
+        setArticlesList(mapped);
+      })
+      .catch((err) => {
+        console.warn("Using fallback static articles:", err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const filtered = articlesList.filter((a) => active === "all" || a.category === active);
+  const featured = articlesList[0] || ARTICLES[0];
   const shown = (active === "all" ? filtered.slice(1) : filtered).slice(0, visible);
 
   const openArticle = (id: number) => {
@@ -388,7 +430,7 @@ export default function ErayTechBlog() {
     window.scrollTo?.({ top: 0, behavior: "smooth" });
   };
 
-  const selectedArticle = ARTICLES.find((a) => a.id === selectedId);
+  const selectedArticle = articlesList.find((a) => a.id === selectedId) || ARTICLES.find((a) => a.id === selectedId);
   if (selectedArticle) {
     return (
       <ArticleDetail

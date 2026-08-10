@@ -7,6 +7,8 @@ import {
 } from "lucide-react";
 import { getProduct, products, type Product } from "@/lib/products";
 
+import { api } from "@/services/api";
+
 export const Route = createFileRoute("/product/$id")({
   head: ({ params }) => {
     const p = getProduct(Number(params.id));
@@ -17,8 +19,47 @@ export const Route = createFileRoute("/product/$id")({
       ],
     };
   },
-  loader: ({ params }) => {
-    const product = getProduct(Number(params.id));
+  loader: async ({ params }) => {
+    const id = Number(params.id);
+    try {
+      const apiPhone = await api.getPhone(id);
+      if (apiPhone) {
+        const numPrice = typeof apiPhone.prix === "number" ? apiPhone.prix : parseFloat(apiPhone.prix as string) || 0;
+        const storageStr = typeof apiPhone.stockage === "number" ? `${apiPhone.stockage} Go` : String(apiPhone.stockage);
+        const brandName = apiPhone.marque?.nom || "Marque";
+        const catName = apiPhone.categorie?.nom || "Smartphones";
+        const product: Product = {
+          id: apiPhone.id,
+          name: apiPhone.name,
+          brand: brandName,
+          category: catName,
+          price: numPrice,
+          oldPrice: Math.round(numPrice * 1.15),
+          discount: 15,
+          rating: 4.8,
+          reviews: 12,
+          image: apiPhone.image || "https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?w=600",
+          gallery: [apiPhone.image || "https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?w=600"],
+          colors: [apiPhone.couleur || "Noir"],
+          storages: [storageStr],
+          inStock: apiPhone.disponibilite !== "Rupture de stock",
+          sku: `PL-${brandName.slice(0, 3).toUpperCase()}-${apiPhone.id.toString().padStart(4, "0")}`,
+          description: `${apiPhone.name} - État: ${apiPhone.etat}. Téléphone disponible chez Eray Tech.`,
+          specs: [
+            { label: "Marque", value: brandName },
+            { label: "Catégorie", value: catName },
+            { label: "Stockage", value: storageStr },
+            { label: "Couleur", value: apiPhone.couleur },
+            { label: "État", value: apiPhone.etat },
+          ],
+        };
+        return { product };
+      }
+    } catch (e) {
+      console.warn("Could not fetch phone from API, fallback to local:", e);
+    }
+
+    const product = getProduct(id);
     if (!product) throw notFound();
     return { product };
   },
@@ -391,7 +432,6 @@ function LinkMobileCheckout({
                   backgroundColor: `rgba(255,255,255,0.05)`,
                   borderColor: `rgba(255,255,255,0.15)`,
                   color: COLORS_CUSTOM.white,
-                  focusRingColor: COLORS_CUSTOM.orange,
                 }} />
             </div>
             <div>
@@ -402,7 +442,6 @@ function LinkMobileCheckout({
                   backgroundColor: `rgba(255,255,255,0.05)`,
                   borderColor: `rgba(255,255,255,0.15)`,
                   color: COLORS_CUSTOM.white,
-                  focusRingColor: COLORS_CUSTOM.orange,
                 }} />
             </div>
             <p className="text-xs flex items-start gap-2" style={{ color: `rgba(255,255,255,0.5)` }}>

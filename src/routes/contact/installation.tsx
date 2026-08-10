@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
+import { api } from "@/services/api";
+
 export const Route = createFileRoute("/contact/installation")({
   component: ContactInstallation,
 });
@@ -30,10 +32,27 @@ const initialForm: InstallationForm = {
 function ContactInstallation() {
   const [form, setForm] = useState<InstallationForm>(initialForm);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setErrorMsg(null);
+    try {
+      await api.sendContact({
+        nom: form.nom,
+        prenom: form.prenom,
+        telephone: form.telephone,
+        adresse: form.adresse,
+        email: form.email,
+      });
+      setSubmitted(true);
+    } catch (err: any) {
+      setErrorMsg(err.message || "Une erreur s'est produite lors de l'envoi.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const update = (field: keyof InstallationForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -112,9 +131,15 @@ function ContactInstallation() {
               />
             </Field>
 
-            <Button type="submit" className="w-full rounded-full py-6 text-sm font-semibold">
+            {errorMsg && (
+              <div className="rounded-xl border border-destructive/40 bg-destructive/10 p-3 text-xs text-destructive">
+                {errorMsg}
+              </div>
+            )}
+
+            <Button type="submit" disabled={loading} className="w-full rounded-full py-6 text-sm font-semibold">
               <Send className="h-4 w-4" />
-              Envoyer la demande
+              {loading ? "Envoi en cours..." : "Envoyer la demande"}
             </Button>
           </form>
         )}
