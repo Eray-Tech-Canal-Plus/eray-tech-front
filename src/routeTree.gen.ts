@@ -14,11 +14,23 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CanalRouteImport } from './routes/canal'
 import { Route as BoutiqueRouteImport } from './routes/boutique'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactIndexRouteImport } from './routes/contact/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 import { Route as ContactTelephoneRouteImport } from './routes/contact/telephone'
 import { Route as ContactInstallationRouteImport } from './routes/contact/installation'
+import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminLayoutRouteImport } from './routes/admin/_layout'
+import { Route as AdminLayoutIndexRouteImport } from './routes/admin/_layout/index'
+import { Route as AdminLayoutServicesRouteImport } from './routes/admin/_layout/services'
+import { Route as AdminLayoutReservationsRouteImport } from './routes/admin/_layout/reservations'
+import { Route as AdminLayoutPhonesRouteImport } from './routes/admin/_layout/phones'
+import { Route as AdminLayoutMarquesRouteImport } from './routes/admin/_layout/marques'
+import { Route as AdminLayoutDemandesRouteImport } from './routes/admin/_layout/demandes'
+import { Route as AdminLayoutContactsRouteImport } from './routes/admin/_layout/contacts'
+import { Route as AdminLayoutCategoriesRouteImport } from './routes/admin/_layout/categories'
+import { Route as AdminLayoutBlogsRouteImport } from './routes/admin/_layout/blogs'
 
 const ReservationRoute = ReservationRouteImport.update({
   id: '/reservation',
@@ -43,6 +55,11 @@ const BoutiqueRoute = BoutiqueRouteImport.update({
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -70,83 +87,204 @@ const ContactInstallationRoute = ContactInstallationRouteImport.update({
   path: '/installation',
   getParentRoute: () => ContactRoute,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLayoutRoute = AdminLayoutRouteImport.update({
+  id: '/_layout',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLayoutIndexRoute = AdminLayoutIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminLayoutRoute,
+} as any)
+const AdminLayoutServicesRoute = AdminLayoutServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => AdminLayoutRoute,
+} as any)
+const AdminLayoutReservationsRoute = AdminLayoutReservationsRouteImport.update({
+  id: '/reservations',
+  path: '/reservations',
+  getParentRoute: () => AdminLayoutRoute,
+} as any)
+const AdminLayoutPhonesRoute = AdminLayoutPhonesRouteImport.update({
+  id: '/phones',
+  path: '/phones',
+  getParentRoute: () => AdminLayoutRoute,
+} as any)
+const AdminLayoutMarquesRoute = AdminLayoutMarquesRouteImport.update({
+  id: '/marques',
+  path: '/marques',
+  getParentRoute: () => AdminLayoutRoute,
+} as any)
+const AdminLayoutDemandesRoute = AdminLayoutDemandesRouteImport.update({
+  id: '/demandes',
+  path: '/demandes',
+  getParentRoute: () => AdminLayoutRoute,
+} as any)
+const AdminLayoutContactsRoute = AdminLayoutContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
+  getParentRoute: () => AdminLayoutRoute,
+} as any)
+const AdminLayoutCategoriesRoute = AdminLayoutCategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => AdminLayoutRoute,
+} as any)
+const AdminLayoutBlogsRoute = AdminLayoutBlogsRouteImport.update({
+  id: '/blogs',
+  path: '/blogs',
+  getParentRoute: () => AdminLayoutRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/blog': typeof BlogRoute
   '/boutique': typeof BoutiqueRoute
   '/canal': typeof CanalRoute
   '/contact': typeof ContactRouteWithChildren
   '/reservation': typeof ReservationRoute
+  '/admin/login': typeof AdminLoginRoute
   '/contact/installation': typeof ContactInstallationRoute
   '/contact/telephone': typeof ContactTelephoneRoute
   '/product/$id': typeof ProductIdRoute
   '/contact/': typeof ContactIndexRoute
+  '/admin/blogs': typeof AdminLayoutBlogsRoute
+  '/admin/categories': typeof AdminLayoutCategoriesRoute
+  '/admin/contacts': typeof AdminLayoutContactsRoute
+  '/admin/demandes': typeof AdminLayoutDemandesRoute
+  '/admin/marques': typeof AdminLayoutMarquesRoute
+  '/admin/phones': typeof AdminLayoutPhonesRoute
+  '/admin/reservations': typeof AdminLayoutReservationsRoute
+  '/admin/services': typeof AdminLayoutServicesRoute
+  '/admin/': typeof AdminLayoutIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminLayoutIndexRoute
   '/blog': typeof BlogRoute
   '/boutique': typeof BoutiqueRoute
   '/canal': typeof CanalRoute
   '/reservation': typeof ReservationRoute
+  '/admin/login': typeof AdminLoginRoute
   '/contact/installation': typeof ContactInstallationRoute
   '/contact/telephone': typeof ContactTelephoneRoute
   '/product/$id': typeof ProductIdRoute
   '/contact': typeof ContactIndexRoute
+  '/admin/blogs': typeof AdminLayoutBlogsRoute
+  '/admin/categories': typeof AdminLayoutCategoriesRoute
+  '/admin/contacts': typeof AdminLayoutContactsRoute
+  '/admin/demandes': typeof AdminLayoutDemandesRoute
+  '/admin/marques': typeof AdminLayoutMarquesRoute
+  '/admin/phones': typeof AdminLayoutPhonesRoute
+  '/admin/reservations': typeof AdminLayoutReservationsRoute
+  '/admin/services': typeof AdminLayoutServicesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/blog': typeof BlogRoute
   '/boutique': typeof BoutiqueRoute
   '/canal': typeof CanalRoute
   '/contact': typeof ContactRouteWithChildren
   '/reservation': typeof ReservationRoute
+  '/admin/_layout': typeof AdminLayoutRouteWithChildren
+  '/admin/login': typeof AdminLoginRoute
   '/contact/installation': typeof ContactInstallationRoute
   '/contact/telephone': typeof ContactTelephoneRoute
   '/product/$id': typeof ProductIdRoute
   '/contact/': typeof ContactIndexRoute
+  '/admin/_layout/blogs': typeof AdminLayoutBlogsRoute
+  '/admin/_layout/categories': typeof AdminLayoutCategoriesRoute
+  '/admin/_layout/contacts': typeof AdminLayoutContactsRoute
+  '/admin/_layout/demandes': typeof AdminLayoutDemandesRoute
+  '/admin/_layout/marques': typeof AdminLayoutMarquesRoute
+  '/admin/_layout/phones': typeof AdminLayoutPhonesRoute
+  '/admin/_layout/reservations': typeof AdminLayoutReservationsRoute
+  '/admin/_layout/services': typeof AdminLayoutServicesRoute
+  '/admin/_layout/': typeof AdminLayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/blog'
     | '/boutique'
     | '/canal'
     | '/contact'
     | '/reservation'
+    | '/admin/login'
     | '/contact/installation'
     | '/contact/telephone'
     | '/product/$id'
     | '/contact/'
+    | '/admin/blogs'
+    | '/admin/categories'
+    | '/admin/contacts'
+    | '/admin/demandes'
+    | '/admin/marques'
+    | '/admin/phones'
+    | '/admin/reservations'
+    | '/admin/services'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/blog'
     | '/boutique'
     | '/canal'
     | '/reservation'
+    | '/admin/login'
     | '/contact/installation'
     | '/contact/telephone'
     | '/product/$id'
     | '/contact'
+    | '/admin/blogs'
+    | '/admin/categories'
+    | '/admin/contacts'
+    | '/admin/demandes'
+    | '/admin/marques'
+    | '/admin/phones'
+    | '/admin/reservations'
+    | '/admin/services'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/blog'
     | '/boutique'
     | '/canal'
     | '/contact'
     | '/reservation'
+    | '/admin/_layout'
+    | '/admin/login'
     | '/contact/installation'
     | '/contact/telephone'
     | '/product/$id'
     | '/contact/'
+    | '/admin/_layout/blogs'
+    | '/admin/_layout/categories'
+    | '/admin/_layout/contacts'
+    | '/admin/_layout/demandes'
+    | '/admin/_layout/marques'
+    | '/admin/_layout/phones'
+    | '/admin/_layout/reservations'
+    | '/admin/_layout/services'
+    | '/admin/_layout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   BlogRoute: typeof BlogRoute
   BoutiqueRoute: typeof BoutiqueRoute
   CanalRoute: typeof CanalRoute
@@ -192,6 +330,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -227,8 +372,125 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactInstallationRouteImport
       parentRoute: typeof ContactRoute
     }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/_layout': {
+      id: '/admin/_layout'
+      path: ''
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminLayoutRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/_layout/': {
+      id: '/admin/_layout/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminLayoutIndexRouteImport
+      parentRoute: typeof AdminLayoutRoute
+    }
+    '/admin/_layout/services': {
+      id: '/admin/_layout/services'
+      path: '/services'
+      fullPath: '/admin/services'
+      preLoaderRoute: typeof AdminLayoutServicesRouteImport
+      parentRoute: typeof AdminLayoutRoute
+    }
+    '/admin/_layout/reservations': {
+      id: '/admin/_layout/reservations'
+      path: '/reservations'
+      fullPath: '/admin/reservations'
+      preLoaderRoute: typeof AdminLayoutReservationsRouteImport
+      parentRoute: typeof AdminLayoutRoute
+    }
+    '/admin/_layout/phones': {
+      id: '/admin/_layout/phones'
+      path: '/phones'
+      fullPath: '/admin/phones'
+      preLoaderRoute: typeof AdminLayoutPhonesRouteImport
+      parentRoute: typeof AdminLayoutRoute
+    }
+    '/admin/_layout/marques': {
+      id: '/admin/_layout/marques'
+      path: '/marques'
+      fullPath: '/admin/marques'
+      preLoaderRoute: typeof AdminLayoutMarquesRouteImport
+      parentRoute: typeof AdminLayoutRoute
+    }
+    '/admin/_layout/demandes': {
+      id: '/admin/_layout/demandes'
+      path: '/demandes'
+      fullPath: '/admin/demandes'
+      preLoaderRoute: typeof AdminLayoutDemandesRouteImport
+      parentRoute: typeof AdminLayoutRoute
+    }
+    '/admin/_layout/contacts': {
+      id: '/admin/_layout/contacts'
+      path: '/contacts'
+      fullPath: '/admin/contacts'
+      preLoaderRoute: typeof AdminLayoutContactsRouteImport
+      parentRoute: typeof AdminLayoutRoute
+    }
+    '/admin/_layout/categories': {
+      id: '/admin/_layout/categories'
+      path: '/categories'
+      fullPath: '/admin/categories'
+      preLoaderRoute: typeof AdminLayoutCategoriesRouteImport
+      parentRoute: typeof AdminLayoutRoute
+    }
+    '/admin/_layout/blogs': {
+      id: '/admin/_layout/blogs'
+      path: '/blogs'
+      fullPath: '/admin/blogs'
+      preLoaderRoute: typeof AdminLayoutBlogsRouteImport
+      parentRoute: typeof AdminLayoutRoute
+    }
   }
 }
+
+interface AdminLayoutRouteChildren {
+  AdminLayoutBlogsRoute: typeof AdminLayoutBlogsRoute
+  AdminLayoutCategoriesRoute: typeof AdminLayoutCategoriesRoute
+  AdminLayoutContactsRoute: typeof AdminLayoutContactsRoute
+  AdminLayoutDemandesRoute: typeof AdminLayoutDemandesRoute
+  AdminLayoutMarquesRoute: typeof AdminLayoutMarquesRoute
+  AdminLayoutPhonesRoute: typeof AdminLayoutPhonesRoute
+  AdminLayoutReservationsRoute: typeof AdminLayoutReservationsRoute
+  AdminLayoutServicesRoute: typeof AdminLayoutServicesRoute
+  AdminLayoutIndexRoute: typeof AdminLayoutIndexRoute
+}
+
+const AdminLayoutRouteChildren: AdminLayoutRouteChildren = {
+  AdminLayoutBlogsRoute: AdminLayoutBlogsRoute,
+  AdminLayoutCategoriesRoute: AdminLayoutCategoriesRoute,
+  AdminLayoutContactsRoute: AdminLayoutContactsRoute,
+  AdminLayoutDemandesRoute: AdminLayoutDemandesRoute,
+  AdminLayoutMarquesRoute: AdminLayoutMarquesRoute,
+  AdminLayoutPhonesRoute: AdminLayoutPhonesRoute,
+  AdminLayoutReservationsRoute: AdminLayoutReservationsRoute,
+  AdminLayoutServicesRoute: AdminLayoutServicesRoute,
+  AdminLayoutIndexRoute: AdminLayoutIndexRoute,
+}
+
+const AdminLayoutRouteWithChildren = AdminLayoutRoute._addFileChildren(
+  AdminLayoutRouteChildren,
+)
+
+interface AdminRouteChildren {
+  AdminLayoutRoute: typeof AdminLayoutRouteWithChildren
+  AdminLoginRoute: typeof AdminLoginRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminLayoutRoute: AdminLayoutRouteWithChildren,
+  AdminLoginRoute: AdminLoginRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface ContactRouteChildren {
   ContactInstallationRoute: typeof ContactInstallationRoute
@@ -247,6 +509,7 @@ const ContactRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   BlogRoute: BlogRoute,
   BoutiqueRoute: BoutiqueRoute,
   CanalRoute: CanalRoute,
