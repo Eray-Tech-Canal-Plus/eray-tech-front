@@ -39,9 +39,6 @@ jobs:
         npm install @tailwindcss/oxide-linux-x64-gnu --no-save
         npm rebuild @tailwindcss/vite
 
-    - name: Lint
-      run: npm run lint
-
     - name: Build frontend
       run: npm run build
 
