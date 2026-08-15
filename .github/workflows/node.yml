@@ -1,7 +1,4 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: Node.js CI
+name: Node.js CI/CD
 
 on:
   push:
@@ -9,23 +6,136 @@ on:
   pull_request:
     branches: [ "prod" ]
 
+run-name: CI/CD ${{ github.ref_name }} #${{ github.run_number }}
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '22'
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Force native bindings
+      run: |
+        npm install @tailwindcss/oxide-linux-x64-gnu --no-save
+        npm rebuild @tailwindcss/vite
+
+    - name: Lint
+      run: npm run lint
+
+    - name: Build frontend
+      run: npm run build
+
+    - name: Verify build output
+      run: |
+        echo "=== Contenu de .output ==="
+        ls -la .output/
+        echo "=== Nombre de fichiers ==="
+        find .output -type f | wc -l
+        echo "=== Arborescence (2 niveaux) ==="
+        find .output -maxdepth 2 -type f | sort | head -60
+
+    - name: Generate build summary
+      run: |
+        {
+          echo "## Build summary"
+          echo ""
+          echo "**Fichiers generes :** \`$(find .output -type f | wc -l)\` | **Taille totale :** \`$(du -sh .output | cut -f1)\` | **Commit :** \`${GITHUB_SHA::7}\`"
+          echo ""
+          echo "| Dossier | Fichiers | Taille |"
+          echo "|---|---|---|"
+          while IFS= read -r dir; do
+            count=$(find "$dir" -type f | wc -l)
+            size=$(du -sh "$dir" | cut -f1)
+            echo "| \`${dir#.output}\` | $count | $size |"
+          done < <(find .output -maxdepth 2 -type d | sort)
+        } >> "$GITHUB_STEP_SUMMARY"
+
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-output
+        path: .output/
+        if-no-files-found: error
+
+  deploy:
+    needs: [build]
+    if: github.ref == 'refs/heads/prod' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Force native bindings
+        run: |
+          npm install @tailwindcss/oxide-linux-x64-gnu --no-save
+          npm rebuild @tailwindcss/vite
+
+      - name: Build frontend
+        run: npm run build
+
+      # ── Prepare deploy folder ─────────────────────────────────
+      - name: Prepare files for FTP
+        run: |
+          mkdir -p deploy
+          cp -r .output/. deploy/
+          echo "=== Structure finale du dossier deploy ==="
+          find deploy -maxdepth 3 -type f | sort
+
+      # ── FTP Deploy ────────────────────────────────────────────
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./deploy/
+          server-dir: ${{ secrets.FTP_SERVER_DIR || '/' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+
+      - name: Generate deploy summary
+        if: success()
+        run: |
+          {
+            echo "## Deploy summary"
+            echo ""
+            echo "**Deploiement reussi** sur le serveur FTP."
+            echo ""
+            echo "**Fichiers deployes :** \`$(find deploy -type f | wc -l)\` | **Taille totale :** \`$(du -sh deploy | cut -f1)\`"
+            echo ""
+            echo "| Dossier | Fichiers | Taille |"
+            echo "|---|---|---|"
+            while IFS= read -r dir; do
+              count=$(find "$dir" -type f | wc -l)
+              size=$(du -sh "$dir" | cut -f1)
+              echo "| \`${dir#deploy}\` | $count | $size |"
+            done < <(find deploy -maxdepth 2 -type d | sort)
+          } >> "$GITHUB_STEP_SUMMARY"
