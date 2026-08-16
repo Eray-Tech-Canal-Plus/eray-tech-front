@@ -18,7 +18,7 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 lg:px-10">
         <Link to="/" className="flex items-center gap-3">
           <img
-            src="/images/logo-area.svg"
+            src="/images/logo-area.png"
             alt="NEXT TECH & SERVICES"
             className="h-10 w-auto object-contain object-left"
           />

@@ -25,7 +25,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Link to="/" className="inline-flex items-center gap-3">
               <img
-                src="/images/logo-area.svg"
+                src="/images/logo-area.png"
                 alt="NEXT TECH & SERVICES"
                 className="h-9 w-auto object-contain"
               />
