@@ -47,10 +47,10 @@ const services: Service[] = [
   {
     id: "canal",
     tag: "SERVICE PRINCIPAL",
-    title: "Installation CANAL+",
+    title: "Services CANAL+",
     short: "Canal+",
-    description: "Installation, activation et assistance Canal+ à domicile par des professionnels.",
-    cta: "Demander une installation",
+    description: "Réabonnement rapide, vente avec installation gratuite et dépannage à domicile de vos équipements Canal+.",
+    cta: "Découvrir nos services",
     href: "/reservation",
     image: "https://images.unsplash.com/photo-1774280918099-599d2647621c?w=1200",
     accentClass: "text-canal",
@@ -58,9 +58,9 @@ const services: Service[] = [
     btnClass:
         "bg-gradient-to-r from-[oklch(0.72_0.17_55)] to-[oklch(0.62_0.17_50)] hover:brightness-110",
     features: [
-      { icon: Satellite, label: "Installation parabole" },
-      { icon: Tv, label: "Activation décodeur" },
-      { icon: Headphones, label: "Assistance 7j/7" },
+      { icon: Zap, label: "Réabonnement" },
+      { icon: Satellite, label: "Installation gratuite" },
+      { icon: Headphones, label: "Dépannage" },
     ],
   },
   {
@@ -90,7 +90,7 @@ const services: Service[] = [
         "Transferts, paiements et gestion de compte depuis votre mobile en toute sécurité.",
     cta: "En savoir plus",
     href: "/contact",
-    image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1200",
+    image: "src/assets/photo_mobile_bancking.png",
     accentClass: "text-banking",
     tagClass: "bg-banking/20 text-banking border-banking/30",
     btnClass: "bg-banking hover:brightness-110",
@@ -155,28 +155,28 @@ type MarketContent = {
 
 const marketContent: Record<ServiceId, MarketContent> = {
   canal: {
-    processBadge: "INSTALLATION EN 3 ÉTAPES",
-    processTitle: 'Ce que nos <span class="text-primary">techniciens</span> font pour vous',
+    processBadge: "NOS SERVICES CANAL+",
+    processTitle: 'Nos interventions <span class="text-primary">Canal+</span> pour vous',
     processSub:
-        "Une prestation complète, de la fixation de l'antenne jusqu'à la première chaîne diffusée.",
+        "Nous vous accompagnons pour vous offrir la meilleure expérience télévision, selon vos besoins.",
     steps: [
       {
         num: "1",
-        icon: Satellite,
-        title: "Pose & orientation d'antenne",
-        text: "Installation de votre antenne parabolique et orientation précise vers le satellite pour capter toutes les chaînes en haute qualité.",
+        icon: Zap,
+        title: "Réabonnement rapide",
+        text: "Ne manquez plus vos programmes favoris. Nous assurons le réabonnement de votre bouquet Canal+ de manière instantanée et sécurisée.",
       },
       {
         num: "2",
-        icon: Tv,
-        title: "Décodeur & mise en service",
-        text: "Raccordement et configuration complète de votre décodeur : activation de l'abonnement, chaînes triées et télécommande prête à l'emploi.",
+        icon: Satellite,
+        title: "Vente & Installation gratuite",
+        text: "Achetez votre kit Canal+ chez nous et profitez d'une installation complète à domicile entièrement gratuite, réalisée par nos experts.",
       },
       {
         num: "3",
-        icon: Wifi,
-        title: "Réglage & garantie signal",
-        text: "Test de qualité, réglage du signal optimal et démonstration. On ne repart qu'une fois que tout fonctionne parfaitement.",
+        icon: Headphones,
+        title: "Dépannage & Assistance",
+        text: "Un problème de signal ou de décodeur ? Notre équipe intervient rapidement pour diagnostiquer et réparer votre installation.",
       },
     ],
     expertBadge: "VOTRE TECHNICIEN",
@@ -508,8 +508,8 @@ function Home() {
 
   const promoContent: Record<ServiceId, { badge: string; text: string }> = {
     canal: {
-      badge: "Intervention rapide",
-      text: 'Une installation propre et professionnelle pour <strong class="text-foreground">regarder Canal+ sans coupure</strong>, partout chez vous.',
+      badge: "Service rapide",
+      text: 'Votre partenaire de confiance pour le <strong class="text-foreground">réabonnement, l\'installation et le dépannage</strong> de vos équipements Canal+.',
     },
     phones: {
       badge: "Livraison 24-48h",
@@ -552,7 +552,16 @@ function Home() {
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
         >
-          <div className="mx-auto w-full max-w-[1400px]">
+          <div className="mx-auto w-full max-w-[1400px] relative">
+            {/* AIMABLE SERVICE STATIONARY BADGE */}
+            <div className="pointer-events-none absolute left-1/2 top-6 z-30 -translate-x-1/2 sm:top-10 lg:left-10 lg:top-10 lg:translate-x-0">
+              <div className="flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-2.5 shadow-2xl backdrop-blur-md ring-1 ring-white/30 sm:px-8 sm:py-3">
+                <span className="font-serif text-xl font-black italic tracking-[0.25em] text-white drop-shadow-md sm:text-2xl">
+                  AIMABLE SERVICE
+                </span>
+              </div>
+            </div>
+
             <div className="grid gap-4 lg:grid-cols-[1fr_380px] lg:gap-5">
               <HeroCarousel
                   service={hero}
@@ -962,7 +971,7 @@ function FeatureBar({ currentId }: { currentId: ServiceId }) {
   const labelMap: Record<ServiceId, string[]> = {
     canal: [
       "1000+ Clients satisfaits",
-      "Installation rapide et garantie",
+      "Services rapides et garantis",
       "Support disponible 7j/7",
       "Techniciens certifiés",
     ],

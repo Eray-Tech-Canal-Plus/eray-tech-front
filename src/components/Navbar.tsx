@@ -20,7 +20,7 @@ export default function Navbar() {
           <img
             src="/images/logo-area.png"
             alt="NEXT TECH & SERVICES"
-            className="h-10 w-auto object-contain object-left"
+            className="h-14 w-auto object-contain object-left md:h-16"
           />
         </Link>
 
