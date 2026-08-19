@@ -554,7 +554,7 @@ function Home() {
         >
           <div className="mx-auto w-full max-w-[1400px] relative">
             {/* AIMABLE SERVICE STATIONARY BADGE */}
-            <div className="pointer-events-none absolute left-1/2 top-6 z-30 -translate-x-1/2 sm:top-10 lg:left-10 lg:top-10 lg:translate-x-0">
+            <div className="pointer-events-none absolute left-1/2 top-6 z-30 -translate-x-1/2 sm:top-10 lg:top-10">
               <div className="flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-2.5 shadow-2xl backdrop-blur-md ring-1 ring-white/30 sm:px-8 sm:py-3">
                 <span className="font-serif text-xl font-black italic tracking-[0.25em] text-white drop-shadow-md sm:text-2xl">
                   AIMABLE SERVICE

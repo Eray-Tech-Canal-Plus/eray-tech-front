@@ -14,8 +14,8 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-30 bg-background/95 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 lg:px-10">
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm">
+      <div className="relative mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 lg:px-10">
         <Link to="/" className="flex items-center gap-3">
           <img
             src="/images/logo-area.png"
@@ -24,7 +24,7 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 text-sm font-medium text-foreground/90 md:flex">
+        <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-8 text-sm font-medium text-foreground/90 md:flex">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.label}
